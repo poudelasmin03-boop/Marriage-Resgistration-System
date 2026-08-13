@@ -1,0 +1,107 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block css %}
+ <link rel="stylesheet" href="{% static 'CSS/home.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+{% if msg %}
+
+  <script>
+    alert("{{msg}}");
+  </script>
+{% endif %}
+ <div>
+
+      <section id="home" class="active">
+  <div class="hero">
+    <h1>Welcome to Marriage Registration System</h1>
+
+    <p>Official platform for marriage registration and documentation</p>
+
+    <button class="btn-primary" >
+      Register Now
+    </button>
+
+    <button class="btn-secondary" >
+      Learn More
+    </button>
+  </div>
+
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon">📝</div>
+
+      <h3>Easy Registration</h3>
+
+      <p>
+        Simple and straightforward online registration process. Fill in your
+        details and submit your marriage certificate application.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+
+      <h3>Track Status</h3>
+
+      <p>
+        Monitor your application status in real-time. Get instant updates on
+        your marriage registration progress.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+
+      <h3>Secure & Verified</h3>
+
+      <p>
+        Your data is protected with industry-standard security. All documents
+        are verified by authorized officials.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">📄</div>
+
+      <h3>Digital Certificate</h3>
+
+      <p>
+        Receive your marriage certificate digitally. Download and print whenever
+        you need it.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+
+      <h3>Fast Processing</h3>
+
+      <p>
+        Quick application processing. Most registrations completed within 7-10
+        business days.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+
+      <h3>24/7 Support</h3>
+
+      <p>
+        Our support team is available round the clock to assist you with any
+        queries.
+      </p>
+    </div>
+  </div>
+</section>;
+
+    </div>
+
+{%  endblock %}

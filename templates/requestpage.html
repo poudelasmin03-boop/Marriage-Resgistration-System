@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}Request Page{% endblock %}
+{% block css %}
+
+<style>
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 30px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table-container th {
+    text-align: center;
+    background-color: #234593;
+    color: #ffffff;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.table-container td {
+  text-align: center;
+
+    padding: 14px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #334155;
+    font-size: 14px;
+}
+
+.table-container tbody tr {
+    transition: 0.2s ease;
+}
+
+.table-container tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.table-container tbody tr:last-child td {
+    border-bottom: none;
+}
+.table-container td:nth-child(5) {
+    color: #2563eb;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+.table-container td:nth-child(6) {
+    font-weight: 600;
+}
+.view{
+  padding: 5px 15px;
+  border: none;
+  border-radius:6px;
+  background-color: #082460;
+  color: white;
+  text-decoration: none;
+}
+/* Responsive */
+@media (max-width: 768px) {
+    .table-container {
+        padding: 10px;
+    }
+
+    .table-container table {
+        min-width: 700px;
+    }
+
+    .table-container th,
+    .table-container td {
+        padding: 12px 10px;
+        font-size: 13px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="table-container">
+   <table border="1px">
+       <thead>
+        <tr>
+           <th>SN</th>
+           <th>Name</th>
+           <th>Address</th>
+           <th>Email</th>
+           <th>View Details</th>
+           <th>Status</th>    
+        </tr>
+       </thead>
+
+       <tbody>
+        {% for i in details %}
+           
+           <tr>
+             <td>{{forloop.counter}}</td>
+             <td>{{i.groomName}}</td>
+             <td>{{i.groomAddress}}</td>
+             <td>{{i.groomEmail}}</td>
+             <td><a href="{% url 'viewdetails' i.id %}" class="view">View</a></td>
+             <td>Pending</td>
+           </tr>
+           {% endfor %}
+       </tbody>
+   </table>
+</section>
+
+
+{% endblock %}

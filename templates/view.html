@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}View{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'CSS/views.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+
+ 
+  <div class="details-card">
+    {% if groom %}
+    <h2>🤵 Groom Details</h2>
+
+    <p><strong>Full Name:</strong>{{groom.groomName}}</p>
+    <p><strong>Date of Birth:</strong> 2002-05-10</p>
+    <p><strong>Email:</strong>{{groom.groomEmail}}</p>
+    <p><strong>Phone:</strong> +977-{{groom.groomPhone}}</p>
+    <p><strong>Address:</strong>{{groom.groomAddress}}</p>
+    {% endif %}
+  </div>
+
+ 
+  <div class="details-card">
+    <h2>👰 Bride Details</h2>
+    {% if bride %}
+    <p><strong>Full Name:</strong>{{bride.brideName}} </p>
+    <p><strong>Date of Birth:</strong> 2003-08-15</p>
+    <p><strong>Email:</strong>>{{bride.brideEmail}}</p>
+    <p><strong>Phone:</strong> +977->{{bride.bridePhone}}</p>
+    <p><strong>Address:</strong>>{{bride.brideAddress}}</p>
+    <p><strong>Bride Image:</strong><p>
+    {% if bride.brideImage %}
+        <img 
+            src="{{ bride.brideImage.url }}" 
+            alt="Bride Image"
+            width="200"
+        >
+    {% else %}
+        No Image Available
+    {% endif %}
+</p>
+    {% endif %}
+  </div>
+
+  
+  <div class="details-card">
+    <h2>🧑‍⚖️ Witness Details</h2>
+     {% if witness %}
+    <p><strong>Name:</strong> {{witness.witnessName}}</p>
+    <p><strong>Email:</strong>{{witness.witnessEmail}}</p>
+    <p><strong>Phone:</strong> +977-{{witness.witnessPhone}}</p>
+    <p><strong>Address:</strong>{{witness.witnessAddress}}</p>
+    {% endif %}
+  </div>
+
+
+  <div class="details-card">
+    <h2>💍 Marriage Details</h2>
+     {% if wedding %}
+    <p><strong>Marriage Date:</strong> 2026-08-15</p>
+    <p><strong>Location:</strong>  {{wedding.weddingLocation}} </p>
+    {% endif %}
+  </div>
+
+</div>
+
+<div class="btn-section">
+   <a href="#" class="approve-btn">Approve</a>
+   <a href="#" class="reject-btn">Reject</a>
+
+</div>
+
+
+{% endblock %}

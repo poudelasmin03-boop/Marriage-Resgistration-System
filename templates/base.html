@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Marriage Registration System{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
+
+    {% block css %}
+    
+    {% endblock %}
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">💍 Marriage Registry</div>
+
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+                <li><a href="/track">Track Status</a></li>
+                <li><a href="/viewdetails">View Details</a></li>
+                <li><a href="/help">Help & Info</a></li>
+                <li><a href="{% url 'request' %}">Marriage Request</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="/track">Track Status</a></li>
+                    <li><a href="/help">Help & Info</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Data Protection</a></li>
+                    <li><a href="#">Disclaimer</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Report Issue</a></li>
+                    <li><a href="#">Feedback</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Marriage Registration System. All Rights Reserved.</p>
+        </div>
+
+    </footer>
+
+</body>
+</html>

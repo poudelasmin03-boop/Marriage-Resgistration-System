@@ -1,0 +1,348 @@
+{% block css %}
+<style>
+  * {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  .verification-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  /* Back button */
+  .back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  /* Main heading */
+  .verification-container h2 {
+    text-align: center;
+    margin-bottom: 35px;
+    color: #0f172a;
+  }
+
+  /* Groom + Bride */
+  .person-container {
+    display: flex;
+    gap: 25px;
+    align-items: stretch;
+  }
+
+  /* Person card */
+  .person-card {
+    flex: 1;
+    padding: 25px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+  }
+
+  /* Card heading */
+  .person-card h3 {
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #2563eb;
+    color: #0f172a;
+  }
+
+  /* Details */
+  .details {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .detail-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .label {
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  .value {
+    color: #1e293b;
+    text-align: right;
+  }
+
+  /* Documents */
+  .documents {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .document {
+    flex: 1;
+    text-align: center;
+  }
+
+  .document h4 {
+    margin-bottom: 12px;
+    color: #334155;
+  }
+
+  /* Large image */
+  .document a {
+    display: block;
+  }
+
+  .document img {
+    width: 100%;
+    height: 350px;
+    object-fit: contain;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #f8fafc;
+    cursor: zoom-in;
+    transition: 0.25s ease;
+  }
+
+  .document img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(15, 23, 42, 0.15);
+  }
+
+  /* Action buttons */
+  .verification-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 35px;
+  }
+
+  .approve-btn,
+  .reject-btn {
+    display: inline-block;
+    min-width: 140px;
+    padding: 13px 25px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: 600;
+    transition: 0.2s ease;
+  }
+
+  /* Approve */
+  .approve-btn {
+    background: #16a34a;
+    color: #ffffff;
+  }
+
+  .approve-btn:hover {
+    background: #15803d;
+  }
+
+  /* Reject */
+  .reject-btn {
+    background: #dc2626;
+    color: #ffffff;
+  }
+
+  .reject-btn:hover {
+    background: #b91c1c;
+  }
+
+  /* =========================
+   RESPONSIVE
+========================= */
+
+  @media (max-width: 900px) {
+    .person-container {
+      flex-direction: column;
+    }
+
+    .document img {
+      height: 400px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .verification-container {
+      width: 95%;
+      padding: 10px;
+      margin: 20px auto;
+    }
+
+    .person-card {
+      padding: 18px;
+    }
+
+    .documents {
+      flex-direction: column;
+    }
+
+    .document img {
+      height: 350px;
+    }
+
+    .detail-item {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .value {
+      text-align: left;
+    }
+
+    .verification-actions {
+      flex-direction: column;
+    }
+
+    .approve-btn,
+    .reject-btn {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+</style>
+{% endblock %}
+
+<!-- Details of the Bride and Groom for document verification -->
+
+<section class="verification-container">
+  <a href="/" class="back-link"> ← Home </a>
+
+  <h2>Marriage Registration Verification</h2>
+
+  <div class="person-container">
+    <!-- =========================
+             GROOM DETAILS
+        ========================== -->
+
+    <div class="person-card">
+      <h3>Groom Details</h3>
+
+      <div class="details">
+        <div class="detail-item">
+          <span class="label"> Name </span>
+
+          <span class="value">{{data.groomName}} </span>
+        </div>
+
+        <div class="detail-item">
+          <span class="label"> Address </span>
+
+          <span class="value"> {{data.groomAddress}} </span>
+        </div>
+
+        <div class="detail-item">
+          <span class="label"> Father Name </span>
+
+          <span class="value"> {{data.groomFatherName}} </span>
+        </div>
+
+        <div class="detail-item">
+          <span class="label"> Mother Name </span>
+
+          <span class="value"> {{data.groomMotherName}} </span>
+        </div>
+      </div>
+
+      <!-- Groom Documents -->
+
+      <div class="documents">
+        <!-- Groom Photo -->
+
+        <div class="document">
+          <h4>Groom Photo</h4>
+
+          <a href="" target="_blank">
+            <img src="{{ data.groomImage.url }}" alt="Groom photo" />
+          </a>
+        </div>
+
+        <!-- Groom NID -->
+
+        <div class="document">
+          <h4>Groom NID</h4>
+
+          <a href="" target="_blank">
+            <img src="{{ data.groomNidImage.url }}" alt="Groom identification document" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================
+             BRIDE DETAILS
+        ========================== -->
+
+    <div class="person-card">
+      <h3>Bride Details</h3>
+
+      <div class="details">
+        <div class="detail-item">
+          <span class="label"> Name </span>
+
+          <span class="value"> {{ data.bride.brideName }} </span>
+        </div>
+
+        <div class="detail-item">
+          <span class="label"> Address </span>
+
+          <span class="value"> {{ data.bride.brideAddress }} </span>
+        </div>
+
+        <div class="detail-item">
+          <span class="label"> Father Name </span>
+
+          <span class="value"> {{ data.bride.brideFatherName }} </span>
+        </div>
+
+        <div class="detail-item">
+          <span class="label"> Mother Name </span>
+
+          <span class="value"> {{ data.bride.brideMotherName }} </span>
+        </div>
+      </div>
+
+
+      <div class="documents">
+
+        <div class="document">
+          <h4>Bride Photo</h4>
+
+          <a href="" target="_blank">
+            <img src="{{ data.bride.brideImage.url}}" alt="Bride photo" />
+          </a>
+        </div>
+
+
+        <div class="document">
+          <h4>Bride NID</h4>
+
+          <a href="" target="_blank">
+            <img src="{{ data.bride.brideNidImage.url}}" alt="Bride identification document" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+         ACTION BUTTONS
+    ========================== -->
+
+  <div class="verification-actions">
+    <a href="" class="approve-btn"> ✓ Approve </a>
+
+    <a href="" class="reject-btn"> ✕ Reject </a>
+  </div>
+</section>

@@ -1,0 +1,105 @@
+
+.table-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    padding:40px 15px;
+}
+
+.table-card{
+    width:100%;
+    max-width:900px;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 8px 25px rgba(0,0,0,.1);
+    padding:25px;
+}
+
+.table-title{
+    text-align:center;
+    color:#2563eb;
+    margin-bottom:20px;
+    font-size:28px;
+}
+
+.table-responsive{
+    overflow-x:auto;
+}
+
+.custom-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:500px;
+}
+
+.custom-table thead{
+    background:#2563eb;
+    color:#fff;
+}
+
+.custom-table th,
+.custom-table td{
+    padding:15px;
+    text-align:left;
+    border-bottom:1px solid #ddd;
+}
+
+.custom-table tbody tr:nth-child(even){
+    background:#f8f9fa;
+}
+
+.custom-table tbody tr:hover{
+    background:#dbeafe;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.custom-table th{
+    font-weight:bold;
+}
+.view-btn{
+    display: inline-block;
+    padding: 8px 16px;
+    background: #2563eb;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.view-btn:hover{
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+.view-btn:active{
+    transform: scale(0.98);
+}
+
+@media (max-width:768px){
+    .view-btn{
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}
+@media(max-width:768px){
+
+.table-card{
+    padding:15px;
+}
+
+.table-title{
+    font-size:22px;
+}
+
+.custom-table th,
+.custom-table td{
+    padding:12px;
+    font-size:14px;
+}
+
+}
