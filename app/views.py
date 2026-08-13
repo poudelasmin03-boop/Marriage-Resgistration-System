@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from PIL import Image
 import pytesseract
 import cv2
@@ -146,7 +146,7 @@ def register_views(request):
 
 
 
-###=====================
+###=====================================
 # ==============REquest page for admin====
 # ====================================
 
@@ -160,5 +160,31 @@ def request_page_views(request):
 #======Detials of bride and Bride======
 # ========-===============
 def view_details(request,id):
-    data = request.GET.get("src")
+    data = get_object_or_404(GroomTable,id=id)
     return render(request,'seeDetails.html',{'data':data})
+
+def image_views(request):
+    src =  request.GET.get('src')
+    return render(request,'image.html',{'src':src})
+
+
+
+
+'''===================Approve by Admin======================'''
+def admin_approve_views(request,id):
+    
+    data  = get_object_or_404(GroomTable,id=id)
+    data.is_valid = True
+    data.status = "Approve"
+    data.save()
+    return redirect('request')
+
+
+
+def admin_reject_view(request,id):
+    data =  get_object_or_404(GroomTable,id=id)
+    data.is_valid=False
+    data.status = "Reject"
+    data.save()
+    return redirect('request')
+    

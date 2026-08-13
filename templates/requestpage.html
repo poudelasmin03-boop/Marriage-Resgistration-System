@@ -10,6 +10,7 @@
     margin-top: 30px;
     padding: 20px;
     box-sizing: border-box;
+    min-height:500px ;
 }
 
 .table-container table {
@@ -69,6 +70,20 @@
   color: white;
   text-decoration: none;
 }
+.status{
+   padding: 5px 14px;
+   border-radius: 8px; 
+   color: whitesmoke;
+}
+.pending{
+    background-color:rgb(221, 156, 36);
+}
+.approve{
+    background-color:rgb(54, 88, 225);
+}
+.reject{
+    background-color:rgb(243, 53, 69);
+}
 /* Responsive */
 @media (max-width: 768px) {
     .table-container {
@@ -111,7 +126,16 @@
              <td>{{i.groomAddress}}</td>
              <td>{{i.groomEmail}}</td>
              <td><a href="{% url 'viewdetails' i.id %}" class="view">View</a></td>
-             <td>Pending</td>
+             <td>
+                {% if i.status == "Pending"%}
+                   <span class="pending status">{{ i.status }}</span>
+                {% elif i.status == "Approve" %}
+                   <span class="approve status">{{ i.status }}</span>
+                {% else %}
+                   <span class="reject status">{{ i.status }}</span>
+                {% endif %}
+            
+            </td>
            </tr>
            {% endfor %}
        </tbody>

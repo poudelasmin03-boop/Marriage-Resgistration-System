@@ -159,9 +159,6 @@
     background: #b91c1c;
   }
 
-  /* =========================
-   RESPONSIVE
-========================= */
 
   @media (max-width: 900px) {
     .person-container {
@@ -268,7 +265,6 @@
           </a>
         </div>
 
-        <!-- Groom NID -->
 
         <div class="document">
           <h4>Groom NID</h4>
@@ -280,9 +276,7 @@
       </div>
     </div>
 
-    <!-- =========================
-             BRIDE DETAILS
-        ========================== -->
+   
 
     <div class="person-card">
       <h3>Bride Details</h3>
@@ -336,13 +330,10 @@
     </div>
   </div>
 
-  <!-- =========================
-         ACTION BUTTONS
-    ========================== -->
-
+ 
   <div class="verification-actions">
-    <a href="" class="approve-btn"> ✓ Approve </a>
+    <a href="{% url 'approve' data.id %}" class="approve-btn"> ✓ Approve </a>
 
-    <a href="" class="reject-btn"> ✕ Reject </a>
+    <a href="{% url 'reject' data.id %}" class="reject-btn"> ✕ Reject </a>
   </div>
 </section>

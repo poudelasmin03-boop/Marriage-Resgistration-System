@@ -22,7 +22,11 @@ class BrideTable(models.Model):
 
 
 class GroomTable(models.Model):
-  
+  STATUS_CHOICES = [
+    ('pending','Pending'),
+    ('reject','Reject'),
+    ('approve','Approve'),
+  ]
   groomName = models.CharField(max_length=1000)
   groomDOB = models.DateField()
   groomEmail = models.EmailField(unique= True)
@@ -33,6 +37,7 @@ class GroomTable(models.Model):
   groomImage=  models.ImageField(upload_to='documents/')
   groomNidImage =  models.ImageField(upload_to='documents/')
   is_document_valid = models.BooleanField(default=False)
+  status   =  models.CharField(max_length=1000,choices=STATUS_CHOICES,default='pending')
   create_at = models.DateTimeField(auto_now_add=True)
   bride = models.ForeignKey(BrideTable,on_delete=models.CASCADE)
   
