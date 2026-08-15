@@ -1,4 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+ html {
+    scroll-behavior: smooth;
+}
+body {
+     font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1e293b;
+}
 
 .container{
     width:95%;
@@ -88,8 +101,11 @@ input[type=file]{
 }
 
 button{
+
     width:220px;
-    margin:auto;
+    position: relative;
+ 
+    margin:10px;
     padding:14px;
     border:none;
     border-radius:6px;

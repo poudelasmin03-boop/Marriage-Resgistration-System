@@ -1,7 +1,4 @@
 
- html {
-    scroll-behavior: smooth;
-}
 .container {
     display: flex;
     justify-content: center;

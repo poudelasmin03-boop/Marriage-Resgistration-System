@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <div class="action-bar">
+    <div class="action-bar" >
       <a href="{% url 'request' %}" class="btn btn-secondary">← Back to Requests</a>
       <button onclick="window.print()" class="btn">🖨️ Print</button>
       <a href="/download"class="download" download="marriagecertificate.html"> Download</a>
@@ -20,14 +20,14 @@
         <h2>Government of Nepal</h2>
         <h3>Ministry of Federal Affairs & Local Development</h3>
         <h3>Office of Local Registrar</h3>
-        <h3>Inaruwa Municipality, Sunsari</h3>
+        <h3>Koahlpur Municipality, Banke</h3>
         <h1>MARRIAGE REGISTRATION CERTIFICATE</h1>
-        <h4 style="margin-top: 8px; font-weight: normal; color: #555;">Issued Date: {{data.issuedDate|date:"d M Y"}}</h4>
+        <h4 style="margin-top: 8px; font-weight: normal; color: #555;">Issued Date: {{data.issuedDate|date:"d F Y"}}</h4>
       </div>
 
       <div class="top">
         <p><strong>Certificate No:</strong> MR-{{data.marriageRequest.registrationDate|date:"Y"}}-{{data.certificateNo}}</p>
-        <p><strong>Registration Date:</strong> {{data.marriageRequest.registrationDate|date:"d M Y"}}</p>
+        <p><strong>Registration Date:</strong> {{data.marriageRequest.registrationDate|date:"d F Y"}}</p>
       </div>
 
       <div class="photos">
@@ -46,7 +46,7 @@
             </tr>
             <tr>
               <td><strong>DOB</strong></td>
-              <td>{{data.marriageRequest.groom.groomDOB|date:"d M Y"}}</td>
+              <td>{{data.marriageRequest.groom.groomDOB|date:"d F Y"}}</td>
             </tr>
             <tr>
               <td><strong>Father</strong></td>
@@ -107,7 +107,7 @@
           </tr>
           <tr>
             <td><strong>District</strong></td>
-            <td>Sunsari</td>
+            <td>Banke</td>
           </tr>
           <tr>
             <td><strong>Province</strong></td>

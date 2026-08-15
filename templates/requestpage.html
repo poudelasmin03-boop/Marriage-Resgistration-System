@@ -84,7 +84,12 @@
 .reject{
     background-color:rgb(243, 53, 69);
 }
-/* Responsive */
+.certificate{
+     padding: 5px 14px;
+   border-radius: 8px; 
+   color: whitesmoke;
+   background-color: #234593;
+}
 @media (max-width: 768px) {
     .table-container {
         padding: 10px;
@@ -131,7 +136,7 @@
                    <span class="pending status" style="  background-color:rgb(221, 156, 36);">{{ i.status }}</span>
                 {% elif i.status == "Approve" %}
                    <span class="approve status">{{ i.status }}</span>
-                   <a href="{% url 'certificate' i.id %}">Certificate</a>
+                   <a href="{% url 'certificate' i.id %}" class="certificate">Certificate</a>
                   
                 {% else %}
                    <span class="reject status">{{ i.status }}</span>

@@ -8,7 +8,7 @@
     padding: 20px;
   }
 
-  /* Back button */
+ 
   .back-link {
     display: inline-block;
     margin-bottom: 20px;
@@ -21,21 +21,21 @@
     text-decoration: underline;
   }
 
-  /* Main heading */
+ 
   .verification-container h2 {
     text-align: center;
     margin-bottom: 35px;
     color: #0f172a;
   }
 
-  /* Groom + Bride */
+ 
   .person-container {
     display: flex;
     gap: 25px;
     align-items: stretch;
   }
 
-  /* Person card */
+ 
   .person-card {
     flex: 1;
     padding: 25px;
@@ -45,7 +45,7 @@
     box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
   }
 
-  /* Card heading */
+  
   .person-card h3 {
     margin-bottom: 20px;
     padding-bottom: 12px;
@@ -53,7 +53,7 @@
     color: #0f172a;
   }
 
-  /* Details */
+  
   .details {
     display: flex;
     flex-direction: column;
@@ -78,7 +78,7 @@
     text-align: right;
   }
 
-  /* Documents */
+ 
   .documents {
     display: flex;
     gap: 20px;
@@ -95,7 +95,7 @@
     color: #334155;
   }
 
-  /* Large image */
+ 
   .document a {
     display: block;
   }
@@ -116,7 +116,7 @@
     box-shadow: 0 5px 15px rgba(15, 23, 42, 0.15);
   }
 
-  /* Action buttons */
+ 
   .verification-actions {
     display: flex;
     justify-content: center;
@@ -136,7 +136,7 @@
     transition: 0.2s ease;
   }
 
-  /* Approve */
+  
   .approve-btn {
     background: #16a34a;
     color: #ffffff;
@@ -146,7 +146,7 @@
     background: #15803d;
   }
 
-  /* Reject */
+  
   .reject-btn {
     background: #dc2626;
     color: #ffffff;
@@ -256,8 +256,8 @@
         <div class="document">
           <h4>Groom Photo</h4>
 
-          <a href="{{ data.groom.groomImage.url }}" target="_blank">
-            <img src="{{ data.groom.groomImage.url }}" alt="Groom photo" />
+          <a href="" target="_blank">
+            <img src="{{ data.groom.groomNidImage.url }}" alt="Groom photo" />
           </a>
         </div>
 
@@ -265,8 +265,8 @@
         <div class="document">
           <h4>Groom NID</h4>
 
-          <a href="{{ data.groom.groomNidImage.url }}" target="_blank">
-            <img src="{{ data.groom.groomNidImage.url }}" alt="Groom identification document" />
+          <a href="" target="_blank">
+            <img src="{{ data.groom.groomImage.url }}" alt="Groom identification document" />
           </a>
         </div>
       </div>
