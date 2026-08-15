@@ -74,11 +74,12 @@ WSGI_APPLICATION = "Egovenance.wsgi.application"
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 DATABASES = { 'default': { 
 'ENGINE': 'django.db.backends.postgresql', 
-'NAME': 'e_governance',
+'NAME': 'marriageregister',
  'USER': 'postgres',
  'PASSWORD':'asmin', 
 'HOST': 'localhost', 
-'PORT': '5432', } }
+'PORT': '5432',
+} }
 
 
 # Password validation
@@ -130,3 +131,18 @@ MEDIA_URL = '/media/'
 
 # Path to the physical directory where files are stored on disk
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'poudelasmin03@gmail.com'
+EMAIL_HOST_PASSWORD = 'eylx onyi akum takb'
+
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

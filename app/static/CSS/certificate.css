@@ -1,0 +1,190 @@
+
+  
+      .action-bar {
+        width: 950px;
+        margin: 0 auto 20px auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #8b0000;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+        transition: background 0.3s ease;
+      }
+
+      .btn:hover {
+        background: #b30000;
+      }
+
+      .btn-secondary {
+        background: #4a5568;
+      }
+
+      .btn-secondary:hover {
+        background: #2d3748;
+      }
+
+      .certificate {
+        width: 950px;
+        margin: auto;
+        background: white;
+        border: 8px double #8b0000;
+        padding: 35px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      }
+
+      .header {
+        text-align: center;
+        border-bottom: 2px solid #8b0000;
+        padding-bottom: 20px;
+      }
+
+      .header img {
+        width: 80px;
+        margin-bottom: 10px;
+      }
+
+      .header h2 {
+        color: #b30000;
+        margin: 4px;
+        font-size: 24px;
+      }
+
+      .header h3 {
+        font-size: 16px;
+        font-weight: normal;
+        margin: 2px 0;
+      }
+
+      .header h1 {
+        color: #8b0000;
+        margin-top: 15px;
+        text-decoration: underline;
+        letter-spacing: 1px;
+        font-size: 26px;
+      }
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+        font-size: 17px;
+      }
+
+      .photos {
+        display: flex;
+        justify-content: space-around;
+        margin: 35px 0;
+      }
+      .download{
+        padding: 5px 19px;
+        border-radius: 8px;
+        background-color: rgb(56, 56, 236);
+        border:none;
+      }
+      .card {
+        width: 240px;
+        border: 2px solid #ccc;
+        padding: 12px;
+        text-align: center;
+        border-radius: 8px;
+        background: #fafafa;
+      }
+
+      .card img {
+        width: 170px;
+        height: 200px;
+        object-fit: cover;
+        border: 2px solid #000;
+        margin-bottom: 10px;
+        border-radius: 4px;
+      }
+
+      .card table {
+        width: 100%;
+        margin-top: 10px;
+        font-size: 15px;
+      }
+
+      .card table td {
+        padding: 4px;
+        text-align: left;
+      }
+
+      .content {
+        margin-top: 30px;
+        line-height: 2;
+        text-align: justify;
+        font-size: 18px;
+      }
+
+      .content strong {
+        color: #8b0000;
+      }
+
+      .details {
+        margin-top: 35px;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 6px;
+      }
+
+      .details table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .details td {
+        border: 1px solid #ddd;
+        padding: 10px;
+      }
+
+      .footer {
+        margin-top: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+
+      .signature {
+        text-align: center;
+      }
+
+      .signature hr {
+        width: 220px;
+        border: 1px solid black;
+        margin-bottom: 8px;
+      }
+
+      .seal {
+        width: 120px;
+        opacity: 0.8;
+      }
+
+      @media print {
+        body {
+          background: white;
+          padding: 0;
+        }
+
+        .action-bar {
+          display: none !important;
+        }
+
+        .certificate {
+          box-shadow: none;
+          width: 100%;
+          border: 8px double #8b0000;
+        }
+      }
+ 

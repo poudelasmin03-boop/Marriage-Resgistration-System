@@ -1,8 +1,5 @@
 {% block css %}
 <style>
-  * {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
 
   .verification-container {
     width: 90%;
@@ -230,38 +227,37 @@
         <div class="detail-item">
           <span class="label"> Name </span>
 
-          <span class="value">{{data.groomName}} </span>
+          <span class="value">{{data.groom.groomName}} </span>
         </div>
 
         <div class="detail-item">
           <span class="label"> Address </span>
 
-          <span class="value"> {{data.groomAddress}} </span>
+          <span class="value"> {{data.groom.groomAddress}} </span>
         </div>
 
         <div class="detail-item">
           <span class="label"> Father Name </span>
 
-          <span class="value"> {{data.groomFatherName}} </span>
+          <span class="value"> {{data.groom.groomFatherName}} </span>
         </div>
 
         <div class="detail-item">
           <span class="label"> Mother Name </span>
 
-          <span class="value"> {{data.groomMotherName}} </span>
+          <span class="value"> {{data.groom.groomMotherName}} </span>
         </div>
       </div>
 
-      <!-- Groom Documents -->
+      
 
       <div class="documents">
-        <!-- Groom Photo -->
-
+      
         <div class="document">
           <h4>Groom Photo</h4>
 
-          <a href="" target="_blank">
-            <img src="{{ data.groomImage.url }}" alt="Groom photo" />
+          <a href="{{ data.groom.groomImage.url }}" target="_blank">
+            <img src="{{ data.groom.groomImage.url }}" alt="Groom photo" />
           </a>
         </div>
 
@@ -269,8 +265,8 @@
         <div class="document">
           <h4>Groom NID</h4>
 
-          <a href="" target="_blank">
-            <img src="{{ data.groomNidImage.url }}" alt="Groom identification document" />
+          <a href="{{ data.groom.groomNidImage.url }}" target="_blank">
+            <img src="{{ data.groom.groomNidImage.url }}" alt="Groom identification document" />
           </a>
         </div>
       </div>
@@ -313,7 +309,7 @@
         <div class="document">
           <h4>Bride Photo</h4>
 
-          <a href="" target="_blank">
+          <a href="{{ data.bride.brideImage.url }}" target="_blank">
             <img src="{{ data.bride.brideImage.url}}" alt="Bride photo" />
           </a>
         </div>
@@ -322,7 +318,7 @@
         <div class="document">
           <h4>Bride NID</h4>
 
-          <a href="" target="_blank">
+          <a href="{{ data.bride.brideNidImage.url }}" target="_blank">
             <img src="{{ data.bride.brideNidImage.url}}" alt="Bride identification document" />
           </a>
         </div>

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Help & Info {% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'CSS/help.css' %}">
+{% endblock %}    
+{% block content %}
+    <h1>Help & Support</h1>
+
+    <section>
+      <h2>How to Register</h2>
+      <p>
+        Fill in the bride and groom information and upload the required
+        documents.
+      </p>
+    </section>
+
+    <section>
+      <h2>Required Documents</h2>
+      <ul>
+        <li>Citizenship / NID of Groom</li>
+        <li>Citizenship / NID of Bride</li>
+        <li>Recent photographs</li>
+        <li>Marriage-related information</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Application Status</h2>
+      <p>
+        After submitting your application, the administrator will verify your
+        information and documents.
+      </p>
+    </section>
+
+    <section>
+      <h2>Certificate</h2>
+      <p>
+        After your application is approved, you receive an email the you can view your certificated.
+      </p>
+    </section>
+
+    <section>
+      <h2>Application Rejected?</h2>
+      <p>
+        If your application is rejected, review the provided information and
+        documents and submit the application again.
+      </p>
+    </section>
+
+    <section>
+      <h2>Need More Help?</h2>
+      <p>Contact the Marriage Registration Office for further assistance.</p>
+    </section>
+
+        <section>
+        <h2>About the System</h2>
+        <p>
+            This E-Governance Marriage Registration System allows
+            users to submit marriage registration applications online.
+        </p>
+    </section>
+
+    <section>
+        <h2>Registration Process</h2>
+
+        <ol>
+            <li>Fill in the marriage registration form.</li>
+            <li>Enter bride and groom information.</li>
+            <li>Upload required documents.</li>
+            <li>Submit the application.</li>
+            <li>Administrator verifies the application.</li>
+            <li>Application is approved or rejected.</li>
+            <li>Certificate is generated after approval.</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Required Information</h2>
+
+        <ul>
+            <li>Bride's personal information</li>
+            <li>Groom's personal information</li>
+            <li>Citizenship / NID information</li>
+            <li>Marriage date</li>
+            <li>Marriage location</li>
+            <li>Contact information</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Certificate</h2>
+
+        <p>
+            Once the administrator approves the application,
+            a unique marriage certificate number is generated
+            and the certificate can be viewed online.
+        </p>
+    </section>
+{% endblock %}

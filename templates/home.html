@@ -16,92 +16,95 @@
     alert("{{msg}}");
   </script>
 {% endif %}
- <div>
 
-      <section id="home" class="active">
-  <div class="hero">
-    <h1>Welcome to Marriage Registration System</h1>
-
-    <p>Official platform for marriage registration and documentation</p>
-
-    <button class="btn-primary" >
-      Register Now
-    </button>
-
-    <button class="btn-secondary" >
-      Learn More
-    </button>
-  </div>
-
-  <div class="features">
-    <div class="feature-card">
-      <div class="feature-icon">📝</div>
-
-      <h3>Easy Registration</h3>
-
-      <p>
-        Simple and straightforward online registration process. Fill in your
-        details and submit your marriage certificate application.
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">🔍</div>
-
-      <h3>Track Status</h3>
-
-      <p>
-        Monitor your application status in real-time. Get instant updates on
-        your marriage registration progress.
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">🔒</div>
-
-      <h3>Secure & Verified</h3>
-
-      <p>
-        Your data is protected with industry-standard security. All documents
-        are verified by authorized officials.
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">📄</div>
-
-      <h3>Digital Certificate</h3>
-
-      <p>
-        Receive your marriage certificate digitally. Download and print whenever
-        you need it.
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">⚡</div>
-
-      <h3>Fast Processing</h3>
-
-      <p>
-        Quick application processing. Most registrations completed within 7-10
-        business days.
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">💬</div>
-
-      <h3>24/7 Support</h3>
-
-      <p>
-        Our support team is available round the clock to assist you with any
-        queries.
-      </p>
+<section class="hero">
+  <div class="container">
+    <h1>Register your marriage online</h1>
+    <p>Apply for a marriage license, track your application, and download your certificate — all in one place.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#apply">Start Application</a>
+      <a class="btn btn-outline" href="#status">Check Application Status</a>
     </div>
   </div>
-</section>;
-
+</section>
+ 
+<section class="section" id="apply">
+  <div class="container">
+    <div class="section-title">
+      <h2>What you can do here</h2>
+      <p>Everything related to your marriage registration, handled online.</p>
     </div>
+    <div class="cards">
+      <a class="card" href="#apply">
+        <div class="card-icon">📝</div>
+        <h3>Apply for a License</h3>
+        <p>Fill out the application form and submit required documents to start the registration process.</p>
+      </a>
+      <a class="card" href="#status">
+        <div class="card-icon">🔍</div>
+        <h3>Track Your Status</h3>
+        <p>Enter your application number to check where your request stands — pending, approved, or completed.</p>
+      </a>
+      <a class="card" href="#search">
+        <div class="card-icon">📄</div>
+        <h3>Search Records</h3>
+        <p>Look up a registered marriage or request a certified copy of a certificate.</p>
+      </a>
+    </div>
+  </div>
+</section>
+ 
+<section class="section steps">
+  <div class="container">
+    <div class="section-title">
+      <h2>How it works</h2>
+      <p>Four simple steps to get your marriage registered.</p>
+    </div>
+    <div class="steps-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Fill the form</h4>
+        <p>Provide details of both parties.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Upload documents</h4>
+        <p>ID proof and required certificates.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Review & approval</h4>
+        <p>Officials verify your application.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Get certificate</h4>
+        <p>Download your marriage certificate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section class="section requirements" id="requirements">
+  <div class="container">
+    <div class="section-title">
+      <h2>Requirements</h2>
+      <p>Make sure you have these ready before applying.</p>
+    </div>
+    <ul>
+      <li><span class="check">✓</span> Valid government-issued ID for both parties</li>
+      <li><span class="check">✓</span> Proof of age (birth certificate or ID)</li>
+      <li><span class="check">✓</span> Divorce decree or death certificate, if previously married</li>
+      <li><span class="check">✓</span> Two witnesses present at the time of filing</li>
+      <li><span class="check">✓</span> Passport-size photographs of both parties</li>
+    </ul>
+  </div>
+</section>
+ 
+
+ 
+</body>
+</html>
+ 
 
 {%  endblock %}

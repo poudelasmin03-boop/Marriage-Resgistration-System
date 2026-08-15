@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Official Nepal  Marriage registration system,certificate Generation">
+    <meta name="auhthor" content="Asmin Poudel">
+    <meta name="keywords" content="Nepal Marriage Registration system,Bihe datra,E-governance Nepal">
     <title>{% block title %}Marriage Registration System{% endblock %}</title>
-
+       
     <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
 
     {% block css %}
@@ -13,6 +16,15 @@
     {% endblock %}
 </head>
 <body>
+    {% if messages %}
+      {% for message in messages %}
+         <script>
+             alert("{{message}}")
+
+         </script>
+      {% endfor %}
+      
+     {% endif %} 
 
     <!-- Header -->
     <header>
@@ -21,11 +33,21 @@
 
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
+                <li><a href="{% url 'marriageregister' %}">Register</a></li>
+                <li><a href="{% url 'help' %}">Help & Info</a></li>
+                 {% if request.user.is_authenticated %}
+                 <li><a href="{% url 'request' %}">Marriage Request</a></li>
+                 {% endif %}
+              
+                 
+               {%  if request.user.is_authenticated  %}
+                 <li><a href="{% url 'logout' %}">Logout</a></li>
+               
+               {% else %}  
                 <li><a href="{% url 'register' %}">Register</a></li>
-                <li><a href="/track">Track Status</a></li>
-                <li><a href="/viewdetails">View Details</a></li>
-                <li><a href="/help">Help & Info</a></li>
-                <li><a href="{% url 'request' %}">Marriage Request</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+               {% endif %}
+
 
             </ul>
         </nav>
@@ -39,33 +61,31 @@
 
     <!-- Footer -->
     <footer>
-
         <div class="footer-content">
-
             <div class="footer-section">
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="{% url 'register' %}">Register</a></li>
-                    <li><a href="/track">Track Status</a></li>
-                    <li><a href="/help">Help & Info</a></li>
+                   
+                    <li><a href="{% url 'help' %}">Help & Info</a></li>
                 </ul>
             </div>
 
             <div class="footer-section">
                 <h4>Legal</h4>
                 <ul>
-                    <li><a href="#">Terms & Conditions</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Data Protection</a></li>
-                    <li><a href="#">Disclaimer</a></li>
+                    <li><a href="{% url 'terms' %}">Terms & Conditions</a></li>
+                    <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
+                    <li><a href="{% url 'dataprotection' %}">Data Protection</a></li>
+                    <li><a href="{% url 'disclaimer' %}">Disclaimer</a></li>
                 </ul>
             </div>
 
             <div class="footer-section">
                 <h4>Support</h4>
                 <ul>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="{% url  'contactus'%}">Contact Us</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="#">Report Issue</a></li>
                     <li><a href="#">Feedback</a></li>

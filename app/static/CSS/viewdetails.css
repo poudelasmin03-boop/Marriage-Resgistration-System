@@ -1,4 +1,6 @@
-
+ html {
+    scroll-behavior: smooth;
+}
 .table-container{
     width:100%;
     display:flex;

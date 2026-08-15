@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Terms & condition {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'CSS/privacy&policy.css' %}">
+
+{% endblock %}    
+{% block content %}
+<section>
+    <h1>Terms  & Policy </h1>
+
+    <div class="terms section">
+      <h2>Terms and Conditions</h2>
+      <ul>
+          <li>Users must provide correct and complete information.</li>
+          <li>All submitted documents must be valid and genuine.</li>
+          <li>Applications will be verified before approval.</li>
+          <li>Providing false information may result in application rejection.</li>
+          <li>Users are responsible for keeping their login details secure.</li>
+          <li>Application submission does not guarantee registration approval.</li>
+          <li>Personal information will be used only for registration and verification purposes.</li>
+          <li>Users must not misuse or attempt to damage the system.</li>
+          <li>The system may be temporarily unavailable due to maintenance or technical issues.</li>
+          <li>By using the system, users agree to follow these Terms and Conditions.</li>
+    </ul>
+    </div>
+    </section>
+
+{% endblock %}

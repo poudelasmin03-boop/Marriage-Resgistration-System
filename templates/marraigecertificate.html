@@ -1,0 +1,132 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marriage Registration Certificate</title> 
+    <link rel="stylesheet" href="{% static 'CSS/certificate.css' %}">
+  </head>
+
+  <body>
+    <div class="action-bar">
+      <a href="{% url 'request' %}" class="btn btn-secondary">← Back to Requests</a>
+      <button onclick="window.print()" class="btn">🖨️ Print</button>
+      <a href="/download"class="download" download="marriagecertificate.html"> Download</a>
+    </div>
+
+    <div class="certificate">
+      <div class="header">
+        <h2>Government of Nepal</h2>
+        <h3>Ministry of Federal Affairs & Local Development</h3>
+        <h3>Office of Local Registrar</h3>
+        <h3>Inaruwa Municipality, Sunsari</h3>
+        <h1>MARRIAGE REGISTRATION CERTIFICATE</h1>
+        <h4 style="margin-top: 8px; font-weight: normal; color: #555;">Issued Date: {{data.issuedDate|date:"d M Y"}}</h4>
+      </div>
+
+      <div class="top">
+        <p><strong>Certificate No:</strong> MR-{{data.marriageRequest.registrationDate|date:"Y"}}-{{data.certificateNo}}</p>
+        <p><strong>Registration Date:</strong> {{data.marriageRequest.registrationDate|date:"d M Y"}}</p>
+      </div>
+
+      <div class="photos">
+        <!-- Groom Card -->
+        <div class="card">
+          {% if data.marriageRequest.groom.groomImage %}
+            <img src="{{data.marriageRequest.groom.groomImage.url}}" alt="Groom Photo" />
+          {% else %}
+            <div style="width:170px; height:200px; border:2px solid #000; margin:0 auto 10px auto; display:flex; align-items:center; justify-content:center; background:#eee;">No Photo</div>
+          {% endif %}
+          <h3>Groom</h3>
+          <table>
+            <tr>
+              <td><strong>Name</strong></td>
+              <td>{{data.marriageRequest.groom.groomName}}</td>
+            </tr>
+            <tr>
+              <td><strong>DOB</strong></td>
+              <td>{{data.marriageRequest.groom.groomDOB|date:"d M Y"}}</td>
+            </tr>
+            <tr>
+              <td><strong>Father</strong></td>
+              <td>{{data.marriageRequest.groom.groomFatherName}}</td>
+            </tr>
+            <tr>
+              <td><strong>Address</strong></td>
+              <td>{{data.marriageRequest.groom.groomAddress}}</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Bride Card -->
+        <div class="card">
+         
+            <img src="{{data.marriageRequest.bride.brideImage.url}}" alt="Bride Photo" />
+          <h3>Bride</h3>
+          <table>
+            <tr>
+              <td><strong>Name</strong></td>
+              <td>{{data.marriageRequest.bride.brideName}}</td>
+            </tr>
+            <tr>
+              <td><strong>DOB</strong></td>
+              <td>{{data.marriageRequest.bride.brideDOB|date:"d F Y"}}</td>
+            </tr>
+            <tr>
+              <td><strong>Father</strong></td>
+              <td>{{data.marriageRequest.bride.brideFatherName}}</td>
+            </tr>
+            <tr>
+              <td><strong>Address</strong></td>
+              <td>{{data.marriageRequest.bride.brideAddress}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="content">
+        This is to certify that <strong>Mr. {{data.marriageRequest.groom.groomName}}</strong> and
+        <strong>Ms. {{data.marriageRequest.bride.brideName}}</strong> have legally registered their
+        marriage before the Office of the Local Registrar in accordance with the
+        prevailing laws and regulations of the Government of Nepal. The marriage
+        registration was completed after verification of all required documents
+        and identity records. This certificate serves as the official legal
+        proof of marriage.
+      </div>
+
+      <div class="details">
+        <table>
+          <tr>
+            <td><strong>Marriage Date</strong></td>
+            <td>{{data.marriageRequest.marriageDate|date:"d F Y"}}</td>
+          </tr>
+          <tr>
+            <td><strong>Marriage Place</strong></td>
+            <td>{{data.marriageRequest.place_of_marriage}}</td>
+          </tr>
+          <tr>
+            <td><strong>District</strong></td>
+            <td>Sunsari</td>
+          </tr>
+          <tr>
+            <td><strong>Province</strong></td>
+            <td>Lubmbini Province</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="footer">
+        <div class="signature" style="text-align: left;">
+          <strong>Official Seal</strong><br />
+          Office of Local Registrar
+        </div>
+        <div class="signature">
+          <hr />
+          <strong>Local Registrar</strong><br />
+          Office of Local Registrar
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -122,15 +122,17 @@
            
            <tr>
              <td>{{forloop.counter}}</td>
-             <td>{{i.groomName}}</td>
-             <td>{{i.groomAddress}}</td>
-             <td>{{i.groomEmail}}</td>
+             <td>{{i.groom.groomName}}</td>
+             <td>{{i.groom.groomAddress}}</td>
+             <td>{{i.groom.groomEmail}}</td>
              <td><a href="{% url 'viewdetails' i.id %}" class="view">View</a></td>
              <td>
-                {% if i.status == "Pending"%}
-                   <span class="pending status">{{ i.status }}</span>
+                {% if i.status == "Pending" %}
+                   <span class="pending status" style="  background-color:rgb(221, 156, 36);">{{ i.status }}</span>
                 {% elif i.status == "Approve" %}
                    <span class="approve status">{{ i.status }}</span>
+                   <a href="{% url 'certificate' i.id %}">Certificate</a>
+                  
                 {% else %}
                    <span class="reject status">{{ i.status }}</span>
                 {% endif %}

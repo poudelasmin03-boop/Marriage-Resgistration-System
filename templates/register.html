@@ -1,253 +1,62 @@
 {% extends 'base.html' %}
-{% load static %}
 
-{% block css %}
-<link rel="stylesheet" href="{% static 'CSS/register.css' %}">
+ {% load static %}
+ 
+ {%% block css }Register{% endblock %}
+
+  {% block css %}
+<link rel="stylesheet" href="{% static 'CSS/register.css' %}" />
 {% endblock %}
-
-{% block content %}
+ {% block content %}
 
 <div class="container">
-
-    <h3>Marriage Registration Form</h3>
-
-    <div class="form">
-
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-
-            <!-- ===========================
-                    Bride Section
-            ============================ -->
-
-            <div class="bride-container">
-
-                <h5>Enter Only Bride Data</h5>
-
-                <div class="form-row">
-
-                    <div class="brideForm">
-                        <label>Full Name <span>*</span></label>
-                        <input
-                            type="text"
-                            name="brideName"
-                            id="brideName"
-                            value="{{ brideName|default:'' }}">
-                    </div>
-
-                    <div class="brideForm">
-                        <label>Date of Birth <span>*</span></label>
-                        <input
-                            type="date"
-                            name="brideDOB"
-                            id="brideDOB"
-                            value="{{ brideDOB|default:'' }}">
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-
-                    <div class="brideForm">
-                        <label>Father Name <span>*</span></label>
-                        <input
-                            type="text"
-                            name="brideFatherName"
-                            id="brideFatherName"
-                            value="{{ brideFatherName|default:'' }}">
-                    </div>
-
-                    <div class="brideForm">
-                        <label>Mother Name <span>*</span></label>
-                        <input
-                            type="text"
-                            name="brideMotherName"
-                            id="brideMotherName"
-                            value="{{ brideMotherName|default:'' }}">
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-
-                    <div class="brideForm">
-                        <label>Address <span>*</span></label>
-                        <input
-                            type="text"
-                            name="brideAddress"
-                            id="brideAddress"
-                            value="{{ brideAddress|default:'' }}">
-                    </div>
-
-                    <div class="brideForm">
-                        <label>NID Number <span>*</span></label>
-                        <input
-                            type="text"
-                            name="brideNidNo"
-                            id="brideNidNo"
-                            value="{{ brideNidNo|default:'' }}">
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-
-                    <div class="brideForm">
-                        <label>Email <span>*</span></label>
-                        <input
-                            type="email"
-                            name="brideEmail"
-                            id="brideEmail"
-                            value="{{ brideEmail|default:'' }}">
-                    </div>
-
-                    <div class="brideForm">
-                        <label>Bride Image <span>*</span></label>
-                        <input
-                            type="file"
-                            name="brideImage">
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-
-                    <div class="brideForm">
-                        <label>NID Image <span>*</span></label>
-                        <input
-                            type="file"
-                            name="brideNidImage">
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Groom Section Starts Below -->
-
-<!-- ===========================
-        Groom Section
-=========================== -->
-
-<div class="main-groom-container">
-
-    <h5>Enter Only Groom Data</h5>
-
-    <div class="groom-container">
-
-        <div class="form-row">
-
-            <div class="groomForm">
-                <label>Full Name <span>*</span></label>
-                <input
-                    type="text"
-                    name="groomName"
-                    id="groomName"
-                    value="{{ groomName|default:'' }}">
-            </div>
-
-            <div class="groomForm">
-                <label>Date of Birth <span>*</span></label>
-                <input
-                    type="date"
-                    name="groomDOB"
-                    id="groomDOB"
-                    value="{{ groomDOB|default:'' }}">
-            </div>
-
-        </div>
-
-        <div class="form-row">
-
-            <div class="groomForm">
-                <label>Father Name <span>*</span></label>
-                <input
-                    type="text"
-                    name="groomFatherName"
-                    id="groomFatherName"
-                    value="{{ groomFatherName|default:'' }}">
-            </div>
-
-            <div class="groomForm">
-                <label>Mother Name <span>*</span></label>
-                <input
-                    type="text"
-                    name="groomMotherName"
-                    id="groomMotherName"
-                    value="{{ groomMotherName|default:'' }}">
-            </div>
-
-        </div>
-
-        <div class="form-row">
-
-            <div class="groomForm">
-                <label>Address <span>*</span></label>
-                <input
-                    type="text"
-                    name="groomAddress"
-                    id="groomAddress"
-                    value="{{ groomAddress|default:'' }}">
-            </div>
-
-            <div class="groomForm">
-                <label>NID Number <span>*</span></label>
-                <input
-                    type="text"
-                    name="groomNidNo"
-                    id="groomNidNo"
-                    value="{{ groomNidNo|default:'' }}">
-            </div>
-
-        </div>
-
-        <div class="form-row">
-
-            <div class="groomForm">
-                <label>Email <span>*</span></label>
-                <input
-                    type="email"
-                    name="groomEmail"
-                    id="groomEmail"
-                    value="{{ groomEmail|default:'' }}">
-            </div>
-
-            <div class="groomForm">
-                <label>Groom Image <span>*</span></label>
-                <input
-                    type="file"
-                    name="groomImage"
-                    value="{{groomImage}}">
-            </div>
-
-        </div>
-
-        <div class="form-row">
-
-            <div class="groomForm">
-                <label>NID Image <span>*</span></label>
-                <input
-                    type="file"
-                    name="groomNidImage">
-            </div>
-
-        </div>
-
+  <div class="register-card">
+    <div class="register-header">
+      <h2>Create Account</h2>
+      <p>Create your account to continue.</p>
     </div>
 
-</div>
+    <form method="post">
+      {% csrf_token %}
 
-<button type="submit">Submit Data</button>
+      <div class="input-group">
+        <label>Username</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          placeholder="Enter your username"
+          required
+        />
+      </div>
 
-</form>
-{% if error %} 
+      <div class="input-group">
+        <label>Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+      </div>
 
-<p style="color:red; padding:10px 20px;">{{error}}</p>
-{% endif  %}
-</div>
+      <div class="input-group">
+        <label>Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+      </div>
 
-
-
+      <button type="submit" class="btn btn-success w-100">
+        Create Account
+      </button>
+    </form>
+  </div>
 </div>
 
 {% endblock %}
