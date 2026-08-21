@@ -14,6 +14,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.urls import reverse
 import datetime
 import random
+from  django.db.models import Q
 
 
 #====================================
@@ -487,3 +488,27 @@ def dashboard_views(request):
       'total_approve':total_approve,
       'request_data':request_data
     })
+  
+  
+# ==========
+# MarrraigeVerification'
+'''Addng also searching here'''
+# ============    
+def marriageverification(request):
+    
+  
+     q = request.GET.get('q')
+    
+     if q: 
+        q = q.strip()
+        query = re.sub(r'^[0-9]','',q)
+        data = MarriageRecorde.objects.filter(Q(marriageRequest__bride__brideNidNo__icontains = query) | Q(marriageRequest__groom__groomNidNo__icontains = query)).first()
+        
+        if data:    
+            return render(request,'marriageverification.html',{'data' : data})
+        else:
+         return render(request,'marriageverification.html',{'error_msg':'erNo Marriage Record Foundror' })
+     return render(
+        request,
+        'marriageverification.html'
+    )
