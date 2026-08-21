@@ -1,0 +1,193 @@
+{% extends 'base.html' %} 
+{% load static %}
+ {% block title %}Dashboard - Marriage Registration System{% endblock %}
+ 
+ {% block css %}
+<link rel="stylesheet" href="{% static 'CSS/dashboard.css' %}" />
+{% endblock %} {% block content %}
+
+<div class="dashboard">
+  <div class="dashboard-header">
+    <div>
+      <span class="dashboard-label">ADMIN DASHBOARD</span>
+      <h1>Marriage Registration Dashboard</h1>
+      <p>Manage registrations, requests and marriage records.</p>
+    </div>
+
+   
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon blue">👥</div>
+      <div>
+        <p>Total Users</p>
+        <h2>{{ total_user }}</h2>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon blue">📄</div>
+      <div>
+        <p>Total request</p>
+        <h2>{{ total_request }}</h2>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon orange">📋</div>
+      <div>
+        <p>Pending Requests</p>
+        <h2>{{ total_pending }}</h2>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon green">✓</div>
+      <div>
+        <p>Approved</p>
+        <h2>{{ total_approve }}</h2>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon red">✕</div>
+      <div>
+        <p>Rejected</p>
+        <h2>{{ total_reject }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="dashboard-card recent-card">
+      <div class="card-header">
+        <div>
+          <h3>Recent Marriage Requests</h3>
+          <p>Latest registration requests</p>
+        </div>
+
+        <a href="{% url 'request' %}">View All →</a>
+      </div>
+
+      <div class="request-list">
+        <div class="request-item">
+          <div class="person-icon">👤</div>
+
+          <div class="person-info">
+            <h4>Marriage Registration</h4>
+            <p>New application received</p>
+          </div>
+
+          <span class="status pending"> Pending </span>
+        </div>
+
+        <div class="request-item">
+          <div class="person-icon">👤</div>
+
+          <div class="person-info">
+            <h4>Marriage Registration</h4>
+            <p>Application submitted</p>
+          </div>
+
+          <span class="status approved"> Approved </span>
+        </div>
+
+        <div class="request-item">
+          <div class="person-icon">👤</div>
+
+          <div class="person-info">
+            <h4>Marriage Registration</h4>
+            <p>Application under review</p>
+          </div>
+
+          <span class="status rejected"> Rejected </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-card">
+      <div class="card-header">
+        <div>
+          <h3>Quick Actions</h3>
+          <p>Frequently used options</p>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <a href="{% url 'marriageregister' %}" class="action">
+          <span class="action-icon blue-bg">📝</span>
+          <div>
+            <strong>Register Marriage</strong>
+            <small>Create a new registration</small>
+          </div>
+          <span>→</span>
+        </a>
+
+        <a href="{% url 'request' %}" class="action">
+          <span class="action-icon orange-bg">📋</span>
+          <div>
+            <strong>View Requests</strong>
+            <small>Review pending applications</small>
+          </div>
+          <span>→</span>
+        </a>
+
+        <a href="{% url 'help' %}" class="action">
+          <span class="action-icon green-bg">?</span>
+          <div>
+            <strong>Help & Information</strong>
+            <small>Get registration information</small>
+          </div>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-card activity-card">
+    <div class="card-header">
+      <div>
+        <h3>System Overview</h3>
+        <p>Current marriage registration activity</p>
+      </div>
+    </div>
+
+    <div class="overview-grid">
+      <div class="overview-item">
+        <div class="overview-top">
+          <span>Registration Requests</span>
+          <strong>{{ total_requests }}</strong>
+        </div>
+
+        <div class="progress">
+          <div class="progress-bar blue-progress"></div>
+        </div>
+      </div>
+
+      <div class="overview-item">
+        <div class="overview-top">
+          <span>Approved Applications</span>
+          <strong>{{ approved_requests }}</strong>
+        </div>
+
+        <div class="progress">
+          <div class="progress-bar green-progress"></div>
+        </div>
+      </div>
+
+      <div class="overview-item">
+        <div class="overview-top">
+          <span>Pending Applications</span>
+          <strong>{{ pending_requests }}</strong>
+        </div>
+
+        <div class="progress">
+          <div class="progress-bar orange-progress"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

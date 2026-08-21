@@ -16,8 +16,7 @@
                 <i class="fa-solid fa-user-lock"></i>
             </div>
 
-            <h2>Welcome Back</h2>
-            <p>Sign in to your account to continue.</p>
+            <h2>Admin Login Form</h2>
         </div>
 
         <form method="POST" onsubmit="return AdminForm()">
@@ -29,13 +28,13 @@
                     type="text"
                     name="username"
                     class="form-control"
-                     id="username"
+                    id="username"
                     placeholder="Enter your username"
                     >
-                     <span class="usernameError"></span>
+                    <span class="usernameError"></span>
             </div>
 
-            <div class="input-group">
+            <div class="input-group password-state">
                 <label>Password</label>
                 <input
                     type="password"
@@ -44,12 +43,11 @@
                     id="password"
                     placeholder="Enter your password"
                     >
-                     <span class="show" onclick="ShowPassword()"></span>
+                    <span class="show" onclick="ShowPassword()"></span>
                     <span class="passwordError"></span>
             </div>
 
-          
-
+           
             <button type="submit" class="btn">
                 Login
             </button>
@@ -59,15 +57,10 @@
          <p style="color:red;">{{Error}}</p>
          {% endif %}
 
-        <div class="register-link">
-            <p class="para">
-                Don't have an account?
-                <a href="{% url 'register' %}">Create Account</a>
-            </p>
-        </div>
 
     </div>
 
 </div>
 <script src="{% static 'JS/admin.js' %}"></script>
+
 {% endblock %}

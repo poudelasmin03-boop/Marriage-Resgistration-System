@@ -13,7 +13,7 @@
 
     <div class="form">
 
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" onsubmit=" return marriageForm()">
             {% csrf_token %}
 
             <!-- ===========================
@@ -105,7 +105,8 @@
                         <label>Bride Image <span>*</span></label>
                         <input
                             type="file"
-                            name="brideImage">
+                            name="brideImage"
+                            id="brideImage">
                     </div>
 
                 </div>
@@ -116,7 +117,8 @@
                         <label>NID Image <span>*</span></label>
                         <input
                             type="file"
-                            name="brideNidImage">
+                            name="brideNidImage"
+                            id="brideNidImage">
                     </div>
 
                 </div>
@@ -216,6 +218,7 @@
                 <input
                     type="file"
                     name="groomImage"
+                    id="groomImage"
                    >
             </div>
 
@@ -227,7 +230,8 @@
                 <label>NID Image <span>*</span></label>
                 <input
                     type="file"
-                    name="groomNidImage">
+                    name="groomNidImage"
+                    id="groomNidImage">
             </div>
 
         </div>
@@ -257,11 +261,11 @@
             </div>
 
             <div class="groomForm">
-                <label>registrationDate<span>*</span></label>
+                <label>registration Date<span>*</span></label>
                 <input
                     type="date"
                     name="registrationDate"
-                    id="groomDOB"
+                    id="registrationDate"
                     value="{{ registrationDate|default:'' }}">
             </div>
 
@@ -270,11 +274,11 @@
         <div class="form-row">
 
             <div class="groomForm">
-                <label>place_of_marriage <span>*</span></label>
+                <label>Marriage Location <span>*</span></label>
                 <input
                     type="text"
                     name="place_of_marriage"
-                    id="place_of_marriage"
+                    id="MarriagePlace"
                     value="{{ place_of_marriage|default:'' }}">
             </div>           
         </div>
@@ -283,6 +287,7 @@
     <div>
     <button type="submit">Submit</button>
     </div>
+    <span class="error" style="color: red; padding:5px 90px;"></span>
     </form>
 
 </div>
@@ -298,5 +303,5 @@
 
 
 </div>
-
+<script src="{% static 'JS/marriageregister.js' %}"></script>
 {% endblock %}

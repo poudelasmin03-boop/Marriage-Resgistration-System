@@ -1,104 +1,200 @@
 {% load static %}
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Official Nepal  Marriage registration system,certificate Generation">
-    <meta name="auhthor" content="Asmin Poudel">
-    <meta name="keywords" content="Nepal Marriage Registration system,Bihe datra,E-governance Nepal">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description"content="Official Nepal Marriage registration system, certificate Generation"/>
+
+    <meta name="auhthor" content="Asmin Poudel" />
+
+    <meta
+      name="keywords"
+      content="Nepal Marriage Registration system,Bihe datra,E-governance Nepal"
+    />
+
     <title>{% block title %}Marriage Registration System{% endblock %}</title>
-       
-    <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
 
-    {% block css %}
-    
-    {% endblock %}
-</head>
-<body>
-    {% if messages %}
-      {% for message in messages %}
-         <script>
-             alert("{{message}}")
+    <link rel="stylesheet" href="{% static 'CSS/main.css' %}" />
 
-         </script>
-      {% endfor %}
-      
-     {% endif %} 
+    {% block css %} {% endblock %}
+  </head>
 
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo">💍 Marriage Registry</div>
+  <body>
+    {% if messages %} {% for message in messages %}
+    <script>
+      alert("{{message}}");
+    </script>
+    {% endfor %} 
+    {% endif %}
 
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="{% url 'marriageregister' %}">Register</a></li>
-                <li><a href="{% url 'help' %}">Help & Info</a></li>
-                 {% if request.user.is_authenticated %}
-                 <li><a href="{% url 'request' %}">Marriage Request</a></li>
-                 {% endif %}
+    <header class="site-header">
+      <nav class="navbar">
+        <div class="logo">
+          <span class="logo-icon">💍</span>
+          <span>Marriage Registry</span>
+        </div>
+
+        <ul class="nav-links">
+            {% if request.user.is_superuser or request.user.is_staff %}
+                <li>
+                 <a href="/dashboardviews">
+             
+              Dashboard
+            </a>
+
+            {% endif %}
+          <li>
+            <a href="/">
+             
+              Home
+            </a>
+          </li>
+
+          <li>
+            <a href="{% url 'marriageregister' %}">
+             
+              Marraige Register
+            </a>
+          </li>
+
+          <li>
+            <a href="{% url 'help' %}">
+             
+              Help & Info
+            </a>
+          </li>
+
+          {% if request.user.is_superuser %}
+
+          <li>
+            <a href="{% url 'request' %}">
               
-                 
-               {%  if request.user.is_authenticated  %}
-                 <li><a href="{% url 'logout' %}">Logout</a></li>
-               
-               {% else %}  
-                <li><a href="{% url 'register' %}">Register</a></li>
-                <li><a href="{% url 'login' %}">Login</a></li>
-               {% endif %}
+              Marriage Request
+            </a>
+          </li>
 
+          {% endif %} 
+          
+          
+          {% if request.user.is_authenticated %}
 
-            </ul>
-        </nav>
+          <li>
+            <a href="{% url 'logout' %}" class="logout-link">
+              
+              Logout
+            </a>
+          </li>
+
+          {% else %}
+
+          <li>
+            <a href="{% url 'register' %}" class="register-link"> Register </a>
+          </li>
+
+          <li>
+            <a href="{% url 'login' %}" class="login-link"> Login </a>
+          </li>
+
+          {% endif %}
+        </ul>
+      </nav>
     </header>
 
-    <!-- Main Content -->
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+    <main class="main-content">{% block content %} {% endblock %}</main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="{% url 'register' %}">Register</a></li>
-                   
-                    <li><a href="{% url 'help' %}">Help & Info</a></li>
-                </ul>
-            </div>
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span>💍</span>
+            Marriage Registry
+          </div>
 
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="{% url 'terms' %}">Terms & Conditions</a></li>
-                    <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
-                    <li><a href="{% url 'dataprotection' %}">Data Protection</a></li>
-                    <li><a href="{% url 'disclaimer' %}">Disclaimer</a></li>
-                </ul>
-            </div>
+          <p>
+            A secure and simple digital platform for marriage registration and
+            certificate services.
+          </p>
 
-            <div class="footer-section">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="{% url  'contactus'%}">Contact Us</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Report Issue</a></li>
-                    <li><a href="#">Feedback</a></li>
-                </ul>
-            </div>
-
+          <div class="footer-badge">🇳🇵 Government Service Portal</div>
         </div>
 
-        <div class="footer-bottom">
-            <p>&copy; 2026 Marriage Registration System. All Rights Reserved.</p>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+
+          <ul>
+            <li>
+              <a href="/">Home</a>
+            </li>
+
+            <li>
+              <a href="{% url 'register' %}"> Register </a>
+            </li>
+
+            <li>
+              <a href="{% url 'help' %}"> Help & Info </a>
+            </li>
+          </ul>
         </div>
 
+        <div class="footer-section">
+          <h4>Legal</h4>
+
+          <ul>
+            <li>
+              <a href="{% url 'terms' %}"> Terms & Conditions </a>
+            </li>
+
+            <li>
+              <a href="{% url 'privacy' %}"> Privacy Policy </a>
+            </li>
+
+            <li>
+              <a href="{% url 'dataprotection' %}"> Data Protection </a>
+            </li>
+
+            <li>
+              <a href="{% url 'disclaimer' %}"> Disclaimer </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Support</h4>
+
+          <ul>
+            <li>
+              <a href="{% url 'contactus'%}"> Contact Us </a>
+            </li>
+
+            <li>
+              <a href="#"> FAQ </a>
+            </li>
+
+            <li>
+              <a href="#"> Report Issue </a>
+            </li>
+
+            <li>
+              <a href="#"> Feedback </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-line"></div>
+
+        <div class="footer-bottom-content">
+          <p>&copy; 2026 Marriage Registration System. All Rights Reserved.</p>
+
+          <p>Made with ❤️ in Nepal</p>
+        </div>
+      </div>
     </footer>
 
-</body>
+    <script src="{% static 'JS/base.js' %}"></script>
+  </body>
 </html>

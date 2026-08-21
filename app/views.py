@@ -67,7 +67,7 @@ def login(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-        
+    
         user = authenticate(
             request,
             username=username,
@@ -128,8 +128,9 @@ def register_marriage_views(request):
         
         pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
         
-        image = Image.open(brideNidImage)
+    
         image1 = Image.open(groomNidImage)
+        image = Image.open(brideNidImage)
         
         print(image)
         print(image1)
@@ -147,11 +148,19 @@ def register_marriage_views(request):
         
         text = text.replace(" ","").upper()
         text1 = text1.replace(" ","").upper()
-
+        
+        
+        print(groomDOB)
+        # print(type(groomdob))
+        
+        
+        
         
         
         entered_text = re.sub(r'[^0-9A-Za-z]','',str(brideNidNo).upper())
         entered_text1 = re.sub(r'[^0-9A-Za-z]','',str(groomNidNo).upper())
+        groomdob = re.sub(r'[a-zA-Z]','',groomDOB.upper())
+        bridedob = re.sub(r'[a-zA-Z]','',brideDOB.upper())
         
         print(entered_text,entered_text1)
         print(type(entered_text))
@@ -170,11 +179,15 @@ def register_marriage_views(request):
     
         if entered_text in clean_text:
            counter +=1
+        if bridedob in clean_text:
+            counter+=1 
         if entered_text1 in clean_text1 :
             counter +=1  
+        if groomdob in clean_text1:
+            counter+=1    
             
         print(counter)    
-        if counter < 4: 
+        if counter < 6: 
             return render(request,'marriageregister.html',{'error':'Document isnot valid','brideName':brideName,
                     'brideDOB':brideDOB,
                     'brideAddress':brideAddress,
@@ -231,6 +244,7 @@ def register_marriage_views(request):
             
             
         )
+      
         
         return render(request,'home.html',{'msg':"Successfully Register"})       
     return render(request,'marriageregister.html')
@@ -418,7 +432,58 @@ def privacy_view(request):
 def data_protection_view(request):
     return render(request, "dataprotection.html")
 
+
 def disclaimer_view(request):
     return render(request, "disclaimer.html")
+
 def contactus_views(request):
     return render(request, "contactus.html")
+
+def adminlogin_views(request):
+     if request.method == "POST":
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            
+            user = authenticate(
+                request,
+                username=username,
+                password=password
+            )
+            if not User.objects.filter(username= username).exists():
+                return render(request,'adminlogin.html',{"Error":'Username not exists'})
+            if not  user:
+                return render(request,'adminlogin.html',{"Error":"Incorrect Password"})
+                
+            login_auth(request,user)
+            return redirect('home')
+    
+           
+     return render(request,"adminlogin.html")
+
+
+# ======================
+# ==Dashboard========
+# =========================
+
+
+
+def dashboard_views(request):
+    total_user = User.objects.count()
+    total_request = MarrigaeRequest.objects.count()
+    total_pending = MarrigaeRequest.objects.filter(status = 'Pending').count()
+    total_reject = MarrigaeRequest.objects.filter(status = 'Reject').count()
+    total_approve = MarrigaeRequest.objects.filter(status = 'Approve').count()
+    request_data = MarrigaeRequest.objects.all().order_by('-id')[:5]
+    
+    
+    
+    
+    
+    return render(request,'dashboard.html',{
+      'total_user':total_user, 
+      'total_request':total_request,
+      'total_pending':total_pending,
+      'total_reject':total_reject,
+      'total_approve':total_approve,
+      'request_data':request_data
+    })
