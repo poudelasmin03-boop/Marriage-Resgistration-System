@@ -1,46 +1,167 @@
+/* ==============================
+Privacy & Policy Page
+============================== */
 
-    section{
-      min-height: 80vh;
-      width: 100%;
-    }
-    h1{
-      border-bottom:5px solid #2563eb ;
-      margin: 30px;
-      text-align: center;
-      font-weight: 700;
-    }
-    .section{
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto 22px;
-    padding: 25px 30px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
-    transition: 0.3s ease;
-    }
-    .section:hove{
-       transform: translateY(-3px);
-       box-shadow: 0 8px 25px rgba(15, 23, 42, 0.10);
-    }
-     h2{
-     margin-bottom: 12px;
-    color: #2563eb;
-    font-size: 21px;
-    font-weight: 600;
-    border-left: 4px solid #2563eb;
-    padding-left: 12px;
-     }
-  
-     .section ul {
-      padding: 4px 20px;
-      
-     }
-     .section ul li{
-      padding: 6px 0px;
-     }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+background: #f4f7fb;
+color: #1e293b;
+}
+
+section {
+width: 90%;
+max-width: 1100px;
+margin: 45px auto 50px;
+}
+
+section h1 {
+width: 100%;
+margin: 0 auto 35px;
+text-align: center;
+font-size: 36px;
+font-weight: 700;
+color: #0f172a;
+position: relative;
+}
+
+section h1::after {
+content: "";
+display: block;
+width: 70px;
+height: 4px;
+background: #2563eb;
+margin: 12px auto 0;
+border-radius: 10px;
+}
+
+.section {
+width: 100%;
+margin: 0 auto 22px;
+padding: 25px 30px;
+background: #ffffff;
+border: 1px solid #e2e8f0;
+border-radius: 12px;
+box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+transition: 0.3s ease;
+}
+
+.section:hover {
+transform: translateY(-3px);
+box-shadow: 0 8px 25px rgba(15, 23, 42, 0.10);
+}
+
+.section h2 {
+margin-bottom: 12px;
+color: #2563eb;
+font-size: 21px;
+font-weight: 600;
+border-left: 4px solid #2563eb;
+padding-left: 12px;
+}
+
+.section p {
+color: #64748b;
+font-size: 15px;
+line-height: 1.8;
+}
+
+.section ul,
+.section ol {
+padding-left: 25px;
+color: #475569;
+}
+
+.section li {
+margin-bottom: 9px;
+line-height: 1.6;
+font-size: 15px;
+}
+
 .section ul li::marker {
-    color: #2563eb;
-    font-weight: 700;
+color: #2563eb;
+}
+
+.section ol li::marker {
+color: #2563eb;
+font-weight: 700;
+}
+
+.section:last-child {
+margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+
+
+section {
+    width: 92%;
+    margin-top: 35px;
+}
+
+section h1 {
+    font-size: 30px;
+    margin-bottom: 28px;
+}
+
+.section {
+    padding: 22px;
+    margin-bottom: 18px;
+}
+
+.section h2 {
+    font-size: 19px;
+}
+
+.section p,
+.section li {
+    font-size: 14px;
+}
+
+
+}
+
+@media (max-width: 480px) {
+
+section {
+    width: 94%;
+    margin-top: 25px;
+}
+
+section h1 {
+    font-size: 26px;
+    margin-bottom: 24px;
+}
+
+.section {
+    padding: 18px;
+    border-radius: 9px;
+}
+
+.section h2 {
+    font-size: 18px;
+    padding-left: 9px;
+}
+
+.section p,
+.section li {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.section ul,
+.section ol {
+    padding-left: 20px;
+}
+
+
 }

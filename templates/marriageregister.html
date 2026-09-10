@@ -1,307 +1,378 @@
 {% extends 'base.html' %}
+
 {% load static %}
 
+{% block title %}Marriage Registration{% endblock %}
+
 {% block css %}
+
 <link rel="stylesheet" href="{% static 'CSS/marriageregister.css' %}">
+
 {% endblock %}
 
 {% block content %}
 
 <div class="container">
 
-    <h3>Marriage Registration Form</h3>
+<h3>Marriage Registration Form</h3>
 
-    <div class="form">
+<div class="form">
 
-        <form method="POST" enctype="multipart/form-data" onsubmit=" return marriageForm()">
-            {% csrf_token %}
+    <form method="POST" enctype="multipart/form-data" onsubmit="return marriageForm()">
 
-            <!-- ===========================
-                    Bride Section
-            ============================ -->
+        {% csrf_token %}
 
-            <div class="bride-container">
+        <div class="bride-container">
 
-                <h5>Enter Only Bride Data</h5>
+            <h5>
+                <i class="fa-solid fa-person-dress"></i>
+                Enter Only Bride Data
+            </h5>
+
+            <div class="form-row">
+
+                <div class="brideForm">
+                    <label>Full Name <span>*</span></label>
+                    <input
+                        type="text"
+                        name="brideName"
+                        id="brideName"
+                        value="{{ brideName|default:'' }}">
+                </div>
+
+                <div class="brideForm">
+                    <label>Date of Birth <span>*</span></label>
+                    <input
+                        type="date"
+                        name="brideDOB"
+                        id="brideDOB"
+                        value="{{ brideDOB|default:'' }}">
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="brideForm">
+                    <label>Father Name <span>*</span></label>
+                    <input
+                        type="text"
+                        name="brideFatherName"
+                        id="brideFatherName"
+                        value="{{ brideFatherName|default:'' }}">
+                </div>
+
+                <div class="brideForm">
+                    <label>Mother Name <span>*</span></label>
+                    <input
+                        type="text"
+                        name="brideMotherName"
+                        id="brideMotherName"
+                        value="{{ brideMotherName|default:'' }}">
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="brideForm">
+                    <label>Address <span>*</span></label>
+                    <input
+                        type="text"
+                        name="brideAddress"
+                        id="brideAddress"
+                        value="{{ brideAddress|default:'' }}">
+                </div>
+
+                <div class="brideForm">
+                    <label>NID Number <span>*</span></label>
+                    <input
+                        type="text"
+                        name="brideNidNo"
+                        id="brideNidNo"
+                        value="{{ brideNidNo|default:'' }}">
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="brideForm">
+                    <label>Email <span>*</span></label>
+                    <input
+                        type="email"
+                        name="brideEmail"
+                        id="brideEmail"
+                        value="{{ brideEmail|default:'' }}">
+                </div>
+
+                <div class="brideForm">
+
+                    <label>Bride Image <span>*</span></label>
+
+                    <input
+                        type="file"
+                        name="brideImage"
+                        id="brideImage"
+                        accept="image/*">
+
+                    <img
+                        id="brideImagePreview"
+                        class="image-preview"
+                        alt="Bride Image Preview">
+
+                    <span id="brideImageName" class="file-name"></span>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="brideForm">
+
+                    <label>NID Image <span>*</span></label>
+
+                    <input
+                        type="file"
+                        name="brideNidImage"
+                        id="brideNidImage"
+                        accept="image/*">
+
+                    <img
+                        id="brideNidImagePreview"
+                        class="image-preview"
+                        alt="Bride NID Image Preview">
+
+                    <span id="brideNidImageName" class="file-name"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="main-groom-container">
+
+            <h5>
+                <i class="fa-solid fa-user-tie"></i>
+                Enter Only Groom Data
+            </h5>
+
+            <div class="groom-container">
 
                 <div class="form-row">
 
-                    <div class="brideForm">
+                    <div class="groomForm">
                         <label>Full Name <span>*</span></label>
                         <input
                             type="text"
-                            name="brideName"
-                            id="brideName"
-                            value="{{ brideName|default:'' }}">
+                            name="groomName"
+                            id="groomName"
+                            value="{{ groomName|default:'' }}">
                     </div>
 
-                    <div class="brideForm">
+                    <div class="groomForm">
                         <label>Date of Birth <span>*</span></label>
                         <input
                             type="date"
-                            name="brideDOB"
-                            id="brideDOB"
-                            value="{{ brideDOB|default:'' }}">
+                            name="groomDOB"
+                            id="groomDOB"
+                            value="{{ groomDOB|default:'' }}">
                     </div>
 
                 </div>
 
                 <div class="form-row">
 
-                    <div class="brideForm">
+                    <div class="groomForm">
                         <label>Father Name <span>*</span></label>
                         <input
                             type="text"
-                            name="brideFatherName"
-                            id="brideFatherName"
-                            value="{{ brideFatherName|default:'' }}">
+                            name="groomFatherName"
+                            id="groomFatherName"
+                            value="{{ groomFatherName|default:'' }}">
                     </div>
 
-                    <div class="brideForm">
+                    <div class="groomForm">
                         <label>Mother Name <span>*</span></label>
                         <input
                             type="text"
-                            name="brideMotherName"
-                            id="brideMotherName"
-                            value="{{ brideMotherName|default:'' }}">
+                            name="groomMotherName"
+                            id="groomMotherName"
+                            value="{{ groomMotherName|default:'' }}">
                     </div>
 
                 </div>
 
                 <div class="form-row">
 
-                    <div class="brideForm">
+                    <div class="groomForm">
                         <label>Address <span>*</span></label>
                         <input
                             type="text"
-                            name="brideAddress"
-                            id="brideAddress"
-                            value="{{ brideAddress|default:'' }}">
+                            name="groomAddress"
+                            id="groomAddress"
+                            value="{{ groomAddress|default:'' }}">
                     </div>
 
-                    <div class="brideForm">
+                    <div class="groomForm">
                         <label>NID Number <span>*</span></label>
                         <input
                             type="text"
-                            name="brideNidNo"
-                            id="brideNidNo"
-                            value="{{ brideNidNo|default:'' }}">
+                            name="groomNidNo"
+                            id="groomNidNo"
+                            value="{{ groomNidNo|default:'' }}">
                     </div>
 
                 </div>
 
                 <div class="form-row">
 
-                    <div class="brideForm">
+                    <div class="groomForm">
                         <label>Email <span>*</span></label>
                         <input
                             type="email"
-                            name="brideEmail"
-                            id="brideEmail"
-                            value="{{ brideEmail|default:'' }}">
+                            name="groomEmail"
+                            id="groomEmail"
+                            value="{{ groomEmail|default:'' }}">
                     </div>
 
-                    <div class="brideForm">
-                        <label>Bride Image <span>*</span></label>
+                    <div class="groomForm">
+
+                        <label>Groom Image <span>*</span></label>
+
                         <input
                             type="file"
-                            name="brideImage"
-                            id="brideImage">
+                            name="groomImage"
+                            id="groomImage"
+                            accept="image/*">
+
+                        <img
+                            id="groomImagePreview"
+                            class="image-preview"
+                            alt="Groom Image Preview">
+
+                        <span id="groomImageName" class="file-name"></span>
+
                     </div>
 
                 </div>
 
                 <div class="form-row">
 
-                    <div class="brideForm">
+                    <div class="groomForm">
+
                         <label>NID Image <span>*</span></label>
+
                         <input
                             type="file"
-                            name="brideNidImage"
-                            id="brideNidImage">
+                            name="groomNidImage"
+                            id="groomNidImage"
+                            accept="image/*">
+
+                        <img
+                            id="groomNidImagePreview"
+                            class="image-preview"
+                            alt="Groom NID Image Preview">
+
+                        <span id="groomNidImageName" class="file-name"></span>
+
                     </div>
 
                 </div>
 
             </div>
 
-            
-<!-- ===========================
-        Groom Section
-=========================== -->
+        </div>
 
-<div class="main-groom-container">
 
-    <h5>Enter Only Groom Data</h5>
+        <div class="main-groom-container">
 
-    <div class="groom-container">
+            <h5>
+                <i class="fa-solid fa-ring"></i>
+                Enter Marriage Request
+            </h5>
 
-        <div class="form-row">
+            <div class="groom-container">
 
-            <div class="groomForm">
-                <label>Full Name <span>*</span></label>
-                <input
-                    type="text"
-                    name="groomName"
-                    id="groomName"
-                    value="{{ groomName|default:'' }}">
-            </div>
+                <div class="form-row">
 
-            <div class="groomForm">
-                <label>Date of Birth <span>*</span></label>
-                <input
-                    type="date"
-                    name="groomDOB"
-                    id="groomDOB"
-                    value="{{ groomDOB|default:'' }}">
+                    <div class="groomForm">
+
+                        <label>Marriage Date <span>*</span></label>
+
+                        <input
+                            type="date"
+                            name="marriageDate"
+                            id="marriageDate"
+                            value="{{ marriageDate|default:'' }}">
+
+                    </div>
+
+                    <div class="groomForm">
+
+                        <label>Registration Date <span>*</span></label>
+
+                        <input
+                            type="date"
+                            name="registrationDate"
+                            id="registrationDate"
+                            value="{{ registrationDate|default:'' }}">
+
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="groomForm">
+
+                        <label>Marriage Location <span>*</span></label>
+
+                        <input
+                            type="text"
+                            name="place_of_marriage"
+                            id="MarriagePlace"
+                            value="{{ place_of_marriage|default:'' }}">
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
 
-        <div class="form-row">
 
-            <div class="groomForm">
-                <label>Father Name <span>*</span></label>
-                <input
-                    type="text"
-                    name="groomFatherName"
-                    id="groomFatherName"
-                    value="{{ groomFatherName|default:'' }}">
-            </div>
+        <div class="form-submit">
 
-            <div class="groomForm">
-                <label>Mother Name <span>*</span></label>
-                <input
-                    type="text"
-                    name="groomMotherName"
-                    id="groomMotherName"
-                    value="{{ groomMotherName|default:'' }}">
-            </div>
+            <button type="submit">
+                <i class="fa-solid fa-paper-plane"></i>
+                Submit
+            </button>
 
         </div>
 
-        <div class="form-row">
+        <span class="error"></span>
 
-            <div class="groomForm">
-                <label>Address <span>*</span></label>
-                <input
-                    type="text"
-                    name="groomAddress"
-                    id="groomAddress"
-                    value="{{ groomAddress|default:'' }}">
-            </div>
+        {% if error %}
 
-            <div class="groomForm">
-                <label>NID Number <span>*</span></label>
-                <input
-                    type="text"
-                    name="groomNidNo"
-                    id="groomNidNo"
-                    value="{{ groomNidNo|default:'' }}">
-            </div>
+        <p class="server-error">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            {{error}}
+        </p>
 
-        </div>
+        {% endif %}
 
-        <div class="form-row">
-
-            <div class="groomForm">
-                <label>Email <span>*</span></label>
-                <input
-                    type="email"
-                    name="groomEmail"
-                    id="groomEmail"
-                    value="{{ groomEmail|default:'' }}">
-            </div>
-
-            <div class="groomForm">
-                <label>Groom Image <span>*</span></label>
-                <input
-                    type="file"
-                    name="groomImage"
-                    id="groomImage"
-                   >
-            </div>
-
-        </div>
-
-        <div class="form-row">
-
-            <div class="groomForm">
-                <label>NID Image <span>*</span></label>
-                <input
-                    type="file"
-                    name="groomNidImage"
-                    id="groomNidImage">
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ===========================
-        MArriage request Section
-=========================== -->
-<div class="main-groom-container">
-
-    <h5>Enter Marraige request</h5>
-
-    <div class="groom-container">
-
-        <div class="form-row">
-
-            <div class="groomForm">
-                <label>Marriage Date<span>*</span></label>
-                <input
-                    type="date"
-                    name="marriageDate"
-                    id="marriageDate"
-                    value="{{ marriageDate|default:'' }}">
-            </div>
-
-            <div class="groomForm">
-                <label>registration Date<span>*</span></label>
-                <input
-                    type="date"
-                    name="registrationDate"
-                    id="registrationDate"
-                    value="{{ registrationDate|default:'' }}">
-            </div>
-
-        </div>
-
-        <div class="form-row">
-
-            <div class="groomForm">
-                <label>Marriage Location <span>*</span></label>
-                <input
-                    type="text"
-                    name="place_of_marriage"
-                    id="MarriagePlace"
-                    value="{{ place_of_marriage|default:'' }}">
-            </div>           
-        </div>
-        </div>       
-    </div>
-    <div>
-    <button type="submit">Submit</button>
-    </div>
-    <span class="error" style="color: red; padding:5px 90px;"></span>
     </form>
 
 </div>
 
-
-
-{% if error %} 
-
-<p style="color:red; padding:10px 20px;">{{error}}</p>
-{% endif  %}
 </div>
 
-
-
-</div>
 <script src="{% static 'JS/marriageregister.js' %}"></script>
+
+
 {% endblock %}

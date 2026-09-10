@@ -1,201 +1,260 @@
 {% extends 'base.html' %}
-{% load static  %}
- {% block title  %}Marriage Verification{% endblock%}
- {% block css %}
-    <link rel="stylesheet" href="{% static 'CSS/verification.css'%}">
 
-{% endblock%}
+{% load static %}
 
-{%  block content %}
+{% block title %}Marriage Verification{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'CSS/verification.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
 <div class="verification-page">
 
-    <div class="verification-header">
-        <div class="header-icon">✓</div>
-        <span>OFFICIAL VERIFICATION</span>
-        <h1>Marriage Verification</h1>
+
+<div class="verification-header">
+
+    <div class="header-icon">
+        <i class="fa-solid fa-circle-check"></i>
+    </div>
+
+    <span>OFFICIAL VERIFICATION</span>
+
+    <h1>Marriage Verification</h1>
+
+    <p>
+        Verify whether a marriage has been officially registered
+        in the marriage registration system.
+    </p>
+
+</div>
+
+<div class="verification-card">
+
+    <div class="card-title">
+
+        <h2>Verify Marriage Record</h2>
+
         <p>
-            Verify whether a marriage has been officially registered
-            in the marriage registration system.
+            Enter one of the details below to search for a registered marriage.
         </p>
-    </div>
-
-
-    <div class="verification-card">
-
-        <div class="card-title">
-            <h2>Verify Marriage Record</h2>
-            <p>Enter one of the details below to search for a registered marriage.</p>
-        </div>
-
-
-        <form method = "GET" action="/marriageverification">
-
-            <div class="input-group">
-                <label for="nid">NID Number(Groom or Birde)</label>
-
-                <div class="input-box">
-                    <span>🪪</span>
-                    <input
-                        type="text"
-                        id="nid"
-                        name="q"
-                        placeholder="Enter NID number"
-                        value="{{request.GET.q}}"
-                    >
-                </div>
-            </div>
-
-
-            <div class="or">
-                <span>OR</span>
-            </div>
-
-
-            <div class="input-group">
-                <label for="certificate">Marriage Certificate Number</label>
-
-                <div class="input-box">
-                    <span>📜</span>
-                    <input
-                        type="text"
-                        id="certificate"
-                        placeholder="Enter certificate number"
-                    >
-                </div>
-            </div>
-
-
-            <button type="submit" class="verify-btn">
-                <span>🔍</span>
-                Verify Marriage
-            </button>
-
-        </form>
-
-        <div class="security-note">
-            <span>🔒</span>
-            <p>Your information is securely processed and used only for verification.</p>
-        </div>
 
     </div>
 
+    <form method="GET" action="/marriageverification#result">
+
+        <div class="input-group">
+
+            <label for="nid">NID Number(Groom or Bride)</label>
+
+            <div class="input-box">
+
+                <span>
+                    <i class="fa-solid fa-id-card"></i>
+                </span>
+
+                <input
+                    type="text"
+                    id="nid"
+                    name="q"
+                    placeholder="Enter NID number"
+                    value="{{request.GET.q}}"
+                >
+
+            </div>
+
+        </div>
+
+
+        <button type="submit" class="verify-btn">
+
+            <span>
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+
+            Verify Marriage
+
+        </button>
+
+    </form>
+
+    <div class="security-note">
+
+        <span>
+            <i class="fa-solid fa-lock"></i>
+        </span>
+
+        <p>
+            Your information is securely processed and used only for verification.
+        </p>
+
+    </div>
+
+</div>
+{% if request.GET.q%}
 {% if data %}
-    <div class="result-card">
 
-        <div class="result-header">
+<div class="result-card" id="result">
 
-            <div class="verified-icon">
-                ✓
-            </div>
+    <div class="result-header">
 
-            <div>
-                <span>VERIFICATION RESULT</span>
-                <h2>Marriage Registered</h2>
-            </div>
-
-            <div class="verified-badge">
-                Verified
-            </div>
-
+        <div class="verified-icon">
+            <i class="fa-solid fa-circle-check"></i>
         </div>
-
-
-        <div class="result-divider"></div>
-
-
-        <div class="couple-details">
-
-            <div class="person-card">
-
-                <div class="person-image">
-                    👨
-                </div>
-
-                <div>
-                    <span>GROOM</span>
-                    <h3>{{data.marriageRequest.groom.groomName}}</h3>
-                    <p>NID:{{data.marriageRequest.groom.groomNidNo}}</p>
-                </div>
-
-            </div>
-
-
-            <div class="heart">
-                ♥
-            </div>
-
-
-            <div class="person-card">
-
-                <div class="person-image">
-                    👩
-                </div>
-
-                <div>
-                    <span>BRIDE</span>
-                    <h3>{{datamarriageRequest.bride.brideName}}</h3>
-                    <p>NID: {{data.marriageRequest.bride.brideNidNo}}</</p>
-                </div>
-
-            </div>
-
-        </div>
-
-  
-        <div class="record-details">
-
-            <div>
-                <span>Certificate Number</span>
-                <strong>{{data.certificateNo}}</strong>
-            </div>
-
-            <div>
-                <span>Registration Date</span>
-                <strong>{{data.marriageRequest.registrationDate|date:'d F Y'}}</strong>
-            </div>
-
-            <div>
-                <span>Registration Office</span>
-                <strong>Kohalpur</strong>
-            </div>
-
-            <div>
-                <span>Record Status</span>
-                <strong class="active-status">Active</strong>
-            </div>
-
-        </div>
-   
-
-        <div class="verified-message">
-            <span>✓</span>
-
-            <div>
-                <strong>Official Marriage Record Found</strong>
-                <p>
-                    This marriage is registered in the official
-                    marriage registration system.
-                </p>
-            </div>
-        </div>
-
-    </div>
-
- {% else %}
-    <div class="not-found">
-
-        <div class="not-found-icon">!</div>
 
         <div>
-            <h3>{{ erro_msg }}</h3>
-            <p>
-                No registered marriage was found for the information
-                provided.
-            </p>
+
+            <span>VERIFICATION RESULT</span>
+
+            <h2>Marriage Registered</h2>
+
+        </div>
+
+        <div class="verified-badge">
+            <i class="fa-solid fa-shield-check"></i>
+            Verified
         </div>
 
     </div>
-  {% endif %}  
+
+    <div class="result-divider"></div>
+
+    <div class="couple-details">
+
+        <div class="person-card">
+
+            <div class="person-image">
+                <i class="fa-solid fa-person"></i>
+            </div>
+
+            <div>
+
+                <span>GROOM</span>
+
+                <h3>{{data.marriageRequest.groom.groomName}}</h3>
+
+                <p>
+                    NID:{{data.marriageRequest.groom.groomNidNo}}
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="heart">
+            <i class="fa-solid fa-heart"></i>
+        </div>
+
+        <div class="person-card">
+
+            <div class="person-image">
+                <i class="fa-solid fa-person-dress"></i>
+            </div>
+
+            <div>
+
+                <span>BRIDE</span>
+
+                <h3>{{datamarriageRequest.bride.brideName}}</h3>
+
+                <p>
+                    NID: {{data.marriageRequest.bride.brideNidNo}}
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="record-details">
+
+        <div>
+
+            <span>Certificate Number</span>
+
+            <strong>{{data.certificateNo}}</strong>
+
+        </div>
+
+        <div>
+
+            <span>Registration Date</span>
+
+            <strong>
+                {{data.marriageRequest.registrationDate|date:'d F Y'}}
+            </strong>
+
+        </div>
+
+        <div>
+
+            <span>Registration Office</span>
+
+            <strong>Kohalpur</strong>
+
+        </div>
+
+        <div>
+
+            <span>Record Status</span>
+
+            <strong class="active-status">
+                <i class="fa-solid fa-circle-check"></i>
+                Active
+            </strong>
+
+        </div>
+
+    </div>
+
+    <div class="verified-message">
+
+        <span>
+            <i class="fa-solid fa-circle-check"></i>
+        </span>
+
+        <div>
+
+            <strong>Official Marriage Record Found</strong>
+
+            <p>
+                This marriage is registered in the official
+                marriage registration system.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% else %}
+
+<div class="not-found" id="result">
+
+    <div class="not-found-icon">
+        <i class="fa-solid fa-exclamation"></i>
+    </div>
+
+    <div>
+
+        <h3>{{ erro_msg }}</h3>
+
+        <p>
+            No registered marriage was found for the information
+            provided.
+        </p>
+
+    </div>
+
+</div>
+
+{% endif %}
+{% endif %}
 
 </div>
 

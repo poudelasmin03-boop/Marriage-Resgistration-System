@@ -1,153 +1,279 @@
 {% extends 'base.html' %}
 
 {% block title %}Request Page{% endblock %}
+
 {% block css %}
 
 <style>
-.table-container {
-    width: 100%;
-    overflow-x: auto;
-    margin-top: 30px;
-    padding: 20px;
-    box-sizing: border-box;
-    min-height:500px ;
-}
-
-.table-container table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.table-container th {
-    text-align: center;
-    background-color: #234593;
-    color: #ffffff;
-    padding: 15px 20px;
-    text-align: left;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.table-container td {
-  text-align: center;
-
-    padding: 14px 12px;
-    border-bottom: 1px solid #e2e8f0;
-    color: #334155;
-    font-size: 14px;
-}
-
-.table-container tbody tr {
-    transition: 0.2s ease;
-}
-
-.table-container tbody tr:hover {
-    background-color: #f8fafc;
-}
-
-.table-container tbody tr:last-child td {
-    border-bottom: none;
-}
-.table-container td:nth-child(5) {
-    color: #2563eb;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-
-.table-container td:nth-child(6) {
-    font-weight: 600;
-}
-.view{
-  padding: 5px 15px;
-  border: none;
-  border-radius:6px;
-  background-color: #082460;
-  color: white;
-  text-decoration: none;
-}
-.status{
-   padding: 5px 14px;
-   border-radius: 8px; 
-   color: whitesmoke;
-}
-.pending{
-    background-color:rgb(221, 156, 36);
-}
-.approve{
-    background-color:rgb(54, 88, 225);
-}
-.reject{
-    background-color:rgb(243, 53, 69);
-}
-.certificate{
-     padding: 5px 14px;
-   border-radius: 8px; 
-   color: whitesmoke;
-   background-color: #234593;
-}
-@media (max-width: 768px) {
+    *{
+          font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
     .table-container {
-        padding: 10px;
+        width: 100%;
+        overflow-x: auto;
+        margin-top: 30px;
+        padding: 25px;
+        box-sizing: border-box;
+        min-height: 500px;
     }
 
-    .table-container table {
-        min-width: 700px;
+    .request-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
     }
 
-    .table-container th,
-    .table-container td {
-        padding: 12px 10px;
+    .request-table th {
+        padding: 16px 15px;
+        background-color: #234593;
+        color: #ffffff;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .request-table td {
+        padding: 16px 14px;
+        border-bottom: 1px solid #e2e8f0;
+        color: #334155;
+        font-size: 14px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .request-table tbody tr {
+        transition: all 0.2s ease;
+    }
+
+    .request-table tbody tr:hover {
+        background-color: #f8fafc;
+    }
+
+    .request-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .request-table td:nth-child(2) {
+        color: #0f172a;
+        font-weight: 600;
+    }
+
+    .request-table td:nth-child(3) {
+        max-width: 250px;
+        color: #64748b;
+    }
+
+    .request-table td:nth-child(4) {
+        color: #475569;
+    }
+
+    .view {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 7px;
+        background-color: #082460;
+        color: #ffffff;
+        text-decoration: none;
         font-size: 13px;
+        font-weight: 600;
+        transition: 0.2s ease;
     }
-}
+
+    .view:hover {
+        background-color: #163b8c;
+        transform: translateY(-1px);
+    }
+
+    .status {
+        display: inline-block;
+        padding: 7px 13px;
+        border-radius: 7px;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 600;
+        min-width: 70px;
+    }
+
+    .pending {
+        background-color: rgb(221, 156, 36);
+    }
+
+    .approve {
+        background-color: rgb(54, 88, 225);
+    }
+
+    .reject {
+        background-color: rgb(243, 53, 69);
+    }
+
+    .certificate {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-left: 8px;
+        padding: 7px 13px;
+        border-radius: 7px;
+        color: #ffffff;
+        background-color: #234593;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 600;
+        transition: 0.2s ease;
+    }
+
+    .certificate:hover {
+        background-color: #163b8c;
+        transform: translateY(-1px);
+    }
+    #icon{
+        color: black;
+    }
+
+    .completed {
+        background-color: rgb(20, 206, 69);
+        padding: 7px 10px;
+        border-radius: 20px;
+        
+        color: #eeeaea;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .empty-row {
+        padding: 35px !important;
+        color: #64748b !important;
+        font-size: 15px !important;
+    }
+
+    @media (max-width: 768px) {
+
+        .table-container {
+            padding: 12px;
+            margin-top: 20px;
+        }
+
+        .request-table {
+            min-width: 850px;
+        }
+
+        .request-table th,
+        .request-table td {
+            padding: 13px 10px;
+            font-size: 13px;
+        }
+
+        .view {
+            padding: 7px 12px;
+        }
+
+        .certificate {
+            margin-left: 4px;
+            padding: 7px 10px;
+        }
+    }
+
 </style>
+
 {% endblock %}
 
 {% block content %}
+
 <section class="table-container">
-   <table border="1px">
-       <thead>
+
+<table class="request-table">
+
+    <thead>
         <tr>
-           <th>SN</th>
-           <th>Name</th>
-           <th>Address</th>
-           <th>Email</th>
-           <th>View Details</th>
-           <th>Status</th>    
+            <th>SN</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>View Details</th>
+            <th>Status</th>
         </tr>
-       </thead>
+    </thead>
 
-       <tbody>
+    <tbody>
+
         {% for i in details %}
-           
-           <tr>
-             <td>{{forloop.counter}}</td>
-             <td>{{i.groom.groomName}}</td>
-             <td>{{i.groom.groomAddress}}</td>
-             <td>{{i.groom.groomEmail}}</td>
-             <td><a href="{% url 'viewdetails' i.id %}" class="view">View</a></td>
-             <td>
-                {% if i.status == "Pending" %}
-                   <span class="pending status" style="  background-color:rgb(221, 156, 36);">{{ i.status }}</span>
-                {% elif i.status == "Approve" %}
-                   <span class="approve status">{{ i.status }}</span>
-                   <a href="{% url 'certificate' i.id %}" class="certificate">Certificate</a>
-                  
-                {% else %}
-                   <span class="reject status">{{ i.status }}</span>
-                {% endif %}
-            
-            </td>
-           </tr>
-           {% endfor %}
-       </tbody>
-   </table>
-</section>
 
+        <tr>
+
+            <td>{{forloop.counter}}</td>
+
+            <td>{{i.groom.groomName}}</td>
+
+            <td>{{i.groom.groomAddress}}</td>
+
+            <td>{{i.groom.groomEmail}}</td>
+
+            {% if i.status == "Pending" %}
+
+            <td>
+                <a href="{% url 'viewdetails' i.id %}" class="view">
+                    <i class="fa-solid fa-eye"></i>
+                    View
+                </a>
+            </td>
+
+            {% else %}
+
+            <td>
+                <span class="completed">
+                   <i class="fa-light fa-check" id="icon"></i>  Completed
+                </span>
+            </td>
+
+            {% endif %}
+
+            <td>
+
+                {% if i.status == "Pending" %}
+
+                <span class="pending status">
+                    {{ i.status }}
+                </span>
+
+                {% elif i.status == "Approve" %}
+
+                <span class="approve status">
+                    {{ i.status }}
+                </span>
+
+                <a href="{% url 'certificate' i.id %}" class="certificate">
+                    <i class="fa-solid fa-certificate"></i>
+                    Certificate
+                </a>
+
+                {% else %}
+
+                <span class="reject status">
+                    {{ i.status }}
+                </span>
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+
+</section>
 
 {% endblock %}

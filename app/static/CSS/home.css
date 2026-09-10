@@ -22,6 +22,11 @@ body {
     background: #f4f7fb;
     color: #1e293b;
 }
+.navbar a.active {
+    color: #2563eb;
+    background: #eff6ff;
+    font-weight: 600;
+}
 
   a{ color:inherit; }
   img{ max-width:100%; }

@@ -16,6 +16,9 @@ import datetime
 import random
 from  django.db.models import Q
 
+import numpy as np
+import cv2
+
 
 #====================================
 # ==========Home Views=====
@@ -84,9 +87,13 @@ def login(request):
 
     return render(request,'login.html')
 
-'''================Marriage Register================'''
+
+
+####Marriage register views
 def register_marriage_views(request):
+
     if request.method == "POST":
+
         brideName = request.POST.get('brideName')
         brideDOB = request.POST.get('brideDOB')
         brideFatherName = request.POST.get('brideFatherName')
@@ -94,14 +101,10 @@ def register_marriage_views(request):
         brideAddress = request.POST.get('brideAddress')
         brideEmail = request.POST.get('brideEmail')
         brideNidNo = request.POST.get('brideNidNo')
-        
+
         brideImage = request.FILES.get('brideImage')
         brideNidImage = request.FILES.get('brideNidImage')
-        
-        
-        
-        
-        '''=================Groom Data Enter  ======='''
+
         groomName = request.POST.get('groomName')
         groomDOB = request.POST.get('groomDOB')
         groomFatherName = request.POST.get('groomFatherName')
@@ -109,146 +112,416 @@ def register_marriage_views(request):
         groomAddress = request.POST.get('groomAddress')
         groomNidNo = request.POST.get('groomNidNo')
         groomEmail = request.POST.get('groomEmail')
-        
-        request.session['set_email'] =groomEmail
-        
+
+        request.session['set_email'] = groomEmail
+
         groomImage = request.FILES.get('groomImage')
         groomNidImage = request.FILES.get('groomNidImage')
-       
-        
-         
-        ''' ========Marriage Request============='''
+
         marriageDate = request.POST.get('marriageDate')
         registrationDate = request.POST.get('registrationDate')
-        place_of_marriage=  request.POST.get('place_of_marriage')
-        
-        
-        
-        #==========================================================================OCR + Regex==================
-        # ==================================================== 
-        
-        pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-        
-    
-        image1 = Image.open(groomNidImage)
-        image = Image.open(brideNidImage)
-        
-        print(image)
-        print(image1)
-        
-        keywords = [
-              "LICENSE",
-              "LICENSENO",
-              "NEPAL",
-              'CITIZENSHIP'
-        ]
-        
-        text = pytesseract.image_to_string(image)
-        text1 = pytesseract.image_to_string(image1)
+        place_of_marriage = request.POST.get('place_of_marriage')
 
-        
-        text = text.replace(" ","").upper()
-        text1 = text1.replace(" ","").upper()
-        
-        
-        print(groomDOB)
-        # print(type(groomdob))
-        
-        
-        
-        
-        
-        entered_text = re.sub(r'[^0-9A-Za-z]','',str(brideNidNo).upper())
-        entered_text1 = re.sub(r'[^0-9A-Za-z]','',str(groomNidNo).upper())
-        groomdob = re.sub(r'[a-zA-Z]','',groomDOB.upper())
-        bridedob = re.sub(r'[a-zA-Z]','',brideDOB.upper())
-        
-        print(entered_text,entered_text1)
-        print(type(entered_text))
-        
-        counter = 0
-        
-        for i in keywords:
-           if i in text.upper():
-               counter+=1
-        for j in keywords:
-            if j in text1.upper():
-                counter+=1       
-        
-        clean_text = re.sub(r'[^0-9a-zA-z]','',str(text).upper())
-        clean_text1 = re.sub(r'[^0-9a-zA-z]','',str(text1).upper())
-    
-        if entered_text in clean_text:
-           counter +=1
-        if bridedob in clean_text:
-            counter+=1 
-        if entered_text1 in clean_text1 :
-            counter +=1  
-        if groomdob in clean_text1:
-            counter+=1    
-            
-        print(counter)    
-        if counter < 6: 
-            return render(request,'marriageregister.html',{'error':'Document isnot valid','brideName':brideName,
-                    'brideDOB':brideDOB,
-                    'brideAddress':brideAddress,
-                    'brideEmail':brideEmail,
-                    'brideFatherName':brideFatherName,
-                     'brideNidNo':brideNidNo,
-                    'brideMotherName':brideMotherName,
-                    'groomName':groomName,
-                    'groomDOB':groomDOB,
-                    'groomFatherName':groomFatherName,
-                    'groomMotherName':groomMotherName,
-                    'groomNidNo':groomNidNo,
-                    'groomEmail':groomEmail,
-                    'groomAddress':groomAddress})    
-           
-        #   ================================================
-        # #   ==============End of OCR=====================
-        #   =============================================   
-        
-        bride = Bride.objects.create(
-            brideName = brideName,
-            brideDOB =brideDOB,
-            brideEmail =brideEmail,
-            brideFatherName =brideFatherName,
-            brideMotherName =brideMotherName,
-            brideAddress = brideAddress,
-            brideNidNo = brideNidNo,
-            brideImage = brideImage,
-            brideNidImage = brideNidImage,
-            is_valid = True
-        )    
-        
-        groom = Groom.objects.create(
-                    groomName = groomName,
-                    groomDOB =groomDOB,
-                    groomEmail =groomEmail,
-                    groomFatherName =groomFatherName,
-                    groomMotherName =groomMotherName,
-                    groomAddress = groomAddress,
-                    groomNidNo = groomNidNo,
-                    groomImage = groomImage,
-                    groomNidImage = groomNidImage,
-                    is_document_valid = True,
-                 
-                )
-        
-        
-        MarrigaeRequest.objects.create(
-            groom = groom,
-            bride = bride,
-            marriageDate =marriageDate, 
-            registrationDate =registrationDate,
-            place_of_marriage = place_of_marriage
-            
-            
+        context = {
+            'brideName': brideName,
+            'brideDOB': brideDOB,
+            'brideAddress': brideAddress,
+            'brideEmail': brideEmail,
+            'brideFatherName': brideFatherName,
+            'brideNidNo': brideNidNo,
+            'brideMotherName': brideMotherName,
+
+            'groomName': groomName,
+            'groomDOB': groomDOB,
+            'groomFatherName': groomFatherName,
+            'groomMotherName': groomMotherName,
+            'groomNidNo': groomNidNo,
+            'groomEmail': groomEmail,
+            'groomAddress': groomAddress,
+
+            'marriageDate': marriageDate,
+            'registrationDate': registrationDate,
+            'place_of_marriage': place_of_marriage,
+
+            'brideImage': brideImage,
+            'brideNidImage': brideNidImage,
+            'groomImage': groomImage,
+            'groomNidImage': groomNidImage
+        }
+
+        if not brideImage:
+            context['error'] = 'Please upload bride image'
+            return render(request, 'marriageregister.html', context)
+
+        if not groomImage:
+            context['error'] = 'Please upload groom image'
+            return render(request, 'marriageregister.html', context)
+
+        if not brideNidImage:
+            context['error'] = 'Please upload bride NID image'
+            return render(request, 'marriageregister.html', context)
+
+        if not groomNidImage:
+            context['error'] = 'Please upload groom NID image'
+            return render(request, 'marriageregister.html', context)
+
+        pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+        try:
+
+            image = Image.open(brideNidImage)
+            image1 = Image.open(groomNidImage)
+
+            text = pytesseract.image_to_string(image)
+            text1 = pytesseract.image_to_string(image1)
+
+        except Exception as e:
+
+            print(e)
+
+            context['error'] = 'NID document could not be processed'
+            return render(request, 'marriageregister.html', context)
+
+        keywords = [
+            "LICENSE",
+            "LICENSENO",
+            "NEPAL",
+            "CITIZENSHIP"
+        ]
+
+        text = text.replace(" ", "").upper()
+        text1 = text1.replace(" ", "").upper()
+
+        entered_text = re.sub(
+            r'[^0-9A-Za-z]',
+            '',
+            str(brideNidNo).upper()
         )
-      
-        
-        return render(request,'home.html',{'msg':"Successfully Register"})       
-    return render(request,'marriageregister.html')
+
+        entered_text1 = re.sub(
+            r'[^0-9A-Za-z]',
+            '',
+            str(groomNidNo).upper()
+        )
+
+        bride_dob = re.sub(
+            r'[^a-zA-Z0-9]',
+            '',
+            str(brideDOB).upper()
+        )
+
+        groom_dob = re.sub(
+            r'[^a-zA-Z0-9]',
+            '',
+            str(groomDOB).upper()
+        )
+
+        print("Bride NID:", entered_text)
+        print("Groom NID:", entered_text1)
+        print("Bride DOB:", bride_dob)
+        print("Groom DOB:", groom_dob)
+
+        counter = 0
+
+        for i in keywords:
+
+            if i in text:
+
+                counter += 1
+
+        for j in keywords:
+
+            if j in text1:
+
+                counter += 1
+
+        clean_text = re.sub(
+            r'[^0-9A-Za-z]',
+            '',
+            str(text).upper()
+        )
+
+        clean_text1 = re.sub(
+            r'[^0-9A-Za-z]',
+            '',
+            str(text1).upper()
+        )
+
+        if entered_text and entered_text in clean_text:
+
+            counter += 1
+
+        if entered_text1 and entered_text1 in clean_text1:
+
+            counter += 1
+
+        print("OCR Counter:", counter)
+
+        if counter < 6:
+
+            context['error'] = 'Document is not valid'
+
+            return render(
+                request,
+                'marriageregister.html',
+                context
+            )
+
+        brideImage.seek(0)
+        groomImage.seek(0)
+
+        image1_data = np.frombuffer(
+            brideImage.read(),
+            np.uint8
+        )
+
+        bride_image = cv2.imdecode(
+            image1_data,
+            cv2.IMREAD_COLOR
+        )
+
+        if bride_image is None:
+
+            context['error'] = 'Bride image could not be loaded'
+
+            return render(
+                request,
+                'marriageregister.html',
+                context
+            )
+
+        groomImage.seek(0)
+
+        image2_data = np.frombuffer(
+            groomImage.read(),
+            np.uint8
+        )
+
+        groom_image = cv2.imdecode(
+            image2_data,
+            cv2.IMREAD_COLOR
+        )
+
+        if groom_image is None:
+
+            context['error'] = 'Groom image could not be loaded'
+
+            return render(
+                request,
+                'marriageregister.html',
+                context
+            )
+
+        bride_gray_image = cv2.cvtColor(
+            bride_image,
+            cv2.COLOR_BGR2GRAY
+        )
+
+        groom_gray_image = cv2.cvtColor(
+            groom_image,
+            cv2.COLOR_BGR2GRAY
+        )
+
+        bride_score = cv2.Laplacian(
+            bride_gray_image,
+            cv2.CV_64F
+        ).var()
+
+        groom_score = cv2.Laplacian(
+            groom_gray_image,
+            cv2.CV_64F
+        ).var()
+
+        print("Bride image score:", bride_score)
+        print("Groom image score:", groom_score)
+
+        if bride_score < 100:
+
+            context['error'] = 'Bride image is not clear'
+
+            return render(
+                request,
+                'marriageregister.html',
+                context
+            )
+
+        if groom_score < 100:
+
+            context['error'] = 'Groom image is not clear'
+
+            return render(
+                request,
+                'marriageregister.html',
+                context
+            )
+
+        face_cascade = cv2.CascadeClassifier(
+            cv2.data.haarcascades +
+            "haarcascade_frontalface_default.xml"
+        )
+
+        eye_cascade = cv2.CascadeClassifier(
+            cv2.data.haarcascades +
+            "haarcascade_eye.xml"
+        )
+
+        groom_faces = face_cascade.detectMultiScale(
+            groom_gray_image,
+            1.3,
+            7
+        )
+
+        if len(groom_faces) == 0:
+
+            context['error'] = "Groom image isn't valid"
+
+            return render(
+                request,
+                'marriageregister.html',
+                context
+            )
+
+        groom_eye_detected = False
+
+        for (x, y, w, h) in groom_faces:
+
+            roi_gray = groom_gray_image[
+                y:y + h,
+                x:x + w
+            ]
+
+            roi_bgr = groom_image[
+                y:y + h,
+                x:x + w
+            ]
+
+            eyes = eye_cascade.detectMultiScale(
+                roi_gray,
+                1.3,
+                7
+            )
+
+            if len(eyes) > 0:
+
+                groom_eye_detected = True
+
+        if not groom_eye_detected:
+
+            context['error'] = "Groom face isn't valid"
+
+            return render(
+                request,
+                'marriageregister.html',
+                context
+            )
+
+        bride_faces = face_cascade.detectMultiScale(
+            bride_gray_image,
+            1.3,
+            7
+        )
+
+        if len(bride_faces) == 0:
+
+            context['error'] = "Bride image isn't valid"
+
+            return render(
+                request,
+                'marriageregister.html',
+                context
+            )
+
+        bride_eye_detected = False
+
+        for (x, y, w, h) in bride_faces:
+
+            roi_gray = bride_gray_image[
+                y:y + h,
+                x:x + w
+            ]
+
+            roi_bgr = bride_image[
+                y:y + h,
+                x:x + w
+            ]
+
+            eyes = eye_cascade.detectMultiScale(
+                roi_gray,
+                1.3,
+                7
+            )
+
+            if len(eyes) > 0:
+
+                bride_eye_detected = True
+
+        if not bride_eye_detected:
+
+            context['error'] = "Bride face isn't valid"
+
+            return render(
+                request,
+                'marriageregister.html',
+                context
+            )
+
+        brideImage.seek(0)
+        groomImage.seek(0)
+        brideNidImage.seek(0)
+        groomNidImage.seek(0)
+
+        bride = Bride.objects.create(
+
+            brideName=brideName,
+            brideDOB=brideDOB,
+            brideEmail=brideEmail,
+            brideFatherName=brideFatherName,
+            brideMotherName=brideMotherName,
+            brideAddress=brideAddress,
+            brideNidNo=brideNidNo,
+            brideImage=brideImage,
+            brideNidImage=brideNidImage,
+            is_valid=True
+
+        )
+
+        groom = Groom.objects.create(
+
+            groomName=groomName,
+            groomDOB=groomDOB,
+            groomEmail=groomEmail,
+            groomFatherName=groomFatherName,
+            groomMotherName=groomMotherName,
+            groomAddress=groomAddress,
+            groomNidNo=groomNidNo,
+            groomImage=groomImage,
+            groomNidImage=groomNidImage,
+            is_document_valid=True
+
+        )
+
+        MarrigaeRequest.objects.create(
+
+            groom=groom,
+            bride=bride,
+            marriageDate=marriageDate,
+            registrationDate=registrationDate,
+            place_of_marriage=place_of_marriage
+
+        )
+
+        return render(
+            request,
+            'home.html',
+            {
+                'msg': "Successfully Register"
+            }
+        )
+
+    return render(
+        request,
+        'marriageregister.html'
+    )
 
 
 
@@ -278,21 +551,16 @@ def image_views(request):
 
 
 '''===================Approve by Admin======================'''
+
 def admin_approve_views(request,id):
     data  = get_object_or_404(MarrigaeRequest,id=id)
     get_email = data.groom.groomEmail or request.session.get('set_email')
-
-   
     data.is_valid = True
     data.status = "Approve"
     data.save()
 
-
-    
-    
-   
-    
     certificate = MarriageRecorde.objects.filter(marriageRequest=data).first()
+
     if not certificate:
       certificateNo = random.randint(100000,999999)     
       certificateNo = str(certificateNo)  
@@ -406,8 +674,8 @@ E-Governance System
 
 
     
-def marriageCertifficate(request,id=id):
-        data =  get_object_or_404(MarriageRecorde,id=id)
+def marriageCertifficate(request,id):
+        data =  get_object_or_404(MarriageRecorde,marriageRequest_id=id)
         return render(request,'marraigecertificate.html',{'data':data})
 
 
@@ -495,10 +763,8 @@ def dashboard_views(request):
 '''Addng also searching here'''
 # ============    
 def marriageverification(request):
-    
-  
      q = request.GET.get('q')
-    
+     data = None
      if q: 
         q = q.strip()
         query = re.sub(r'^[0-9]','',q)
@@ -512,3 +778,8 @@ def marriageverification(request):
         request,
         'marriageverification.html'
     )
+
+
+
+def report_issuse_views(request):
+    return render(request,'reportissuse.html')    

@@ -18,7 +18,24 @@ body {
 a {
     text-decoration: none;
 }
+.nav-links a {
+    color: #334155;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: 0.2s ease;
+}
 
+.nav-links a:hover {
+    color: #2563eb;
+    background: #eff6ff;
+}
+
+.nav-links a.active {
+    color: #2563eb;
+    background: #eff6ff;
+    font-weight: 600;
+}
 ul {
     list-style: none;
 }

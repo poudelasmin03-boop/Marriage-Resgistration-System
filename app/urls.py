@@ -2,7 +2,7 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from .views import home_views,register_marriage_views,request_page_views,view_details,image_views,admin_approve_views,admin_reject_view,register,login,logout,marriageCertifficate,help_views,terms_condition_views,data_protection_view,disclaimer_view,privacy_view,contactus_views,adminlogin_views,dashboard_views,marriageverification
+from .views import home_views,register_marriage_views,request_page_views,view_details,image_views,admin_approve_views,admin_reject_view,register,login,logout,marriageCertifficate,help_views,terms_condition_views,data_protection_view,disclaimer_view,privacy_view,contactus_views,adminlogin_views,dashboard_views,marriageverification,report_issuse_views
 
 
 
@@ -35,7 +35,9 @@ urlpatterns = [
    path('contactus_views/',contactus_views,name="contactus"),
    path('adminlogin_views/',adminlogin_views,name="admin"),
    path('dashboardviews',dashboard_views,name="dashboard"),
-   path('marriageverification/',marriageverification,name="marriageverification")
+   path('marriageverification/',marriageverification,name="marriageverification"),
+
+   path("report_issuse_views/",report_issuse_views,name="report_issuse_views"),
    
    
 

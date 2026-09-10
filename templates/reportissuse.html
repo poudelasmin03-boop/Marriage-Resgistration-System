@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Report an Issue{% endblock %}
+
+{% block css %}
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1e293b;
+}
+
+.report-container {
+    width: 90%;
+    max-width: 850px;
+    margin: 45px auto 50px;
+}
+
+.report-container h1 {
+    width: 100%;
+    margin: 0 auto 35px;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    color: #0f172a;
+    position: relative;
+}
+
+.report-container h1::after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 4px;
+    background: #2563eb;
+    margin: 12px auto 0;
+    border-radius: 10px;
+}
+
+.report-card {
+    width: 100%;
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+    transition: 0.3s ease;
+}
+
+.report-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.10);
+}
+
+.intro {
+    margin-bottom: 25px;
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #334155;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1e293b;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #94a3b8;
+}
+
+button {
+    width: 100%;
+    padding: 13px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button i {
+    margin-right: 7px;
+}
+
+button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+
+    .report-container {
+        width: 92%;
+        margin-top: 35px;
+    }
+
+    .report-container h1 {
+        font-size: 30px;
+        margin-bottom: 28px;
+    }
+
+    .report-card {
+        padding: 22px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .report-container {
+        width: 94%;
+        margin-top: 25px;
+    }
+
+    .report-container h1 {
+        font-size: 26px;
+        margin-bottom: 24px;
+    }
+
+    .report-card {
+        padding: 18px;
+        border-radius: 9px;
+    }
+
+    .intro {
+        font-size: 14px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 14px;
+        padding: 11px 12px;
+    }
+}
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<section class="report-container">
+<h1>Report an Issue</h1>
+
+<div class="report-card">
+
+    <p class="intro">
+        If you are experiencing a problem with the Marriage Registration
+        System, please report the issue using the form below. Provide
+        accurate information so that we can review and resolve the problem.
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text"
+                   id="name"
+                   name="name"
+                   placeholder="Enter your full name"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email"
+                   id="email"
+                   name="email"
+                   placeholder="Enter your email address"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label for="issueType">Issue Type</label>
+
+            <select id="issueType" name="issueType" required>
+                <option value="">Select an issue</option>
+                <option value="Registration Problem">
+                    Registration Problem
+                </option>
+                <option value="Document Upload Problem">
+                    Document Upload Problem
+                </option>
+                <option value="Login Problem">
+                    Login Problem
+                </option>
+                <option value="Verification Problem">
+                    Verification Problem
+                </option>
+                <option value="Certificate Problem">
+                    Certificate Problem
+                </option>
+                <option value="Incorrect Information">
+                    Incorrect Information
+                </option>
+                <option value="Technical Error">
+                    Technical Error
+                </option>
+                <option value="Other">
+                    Other
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Describe the Issue</label>
+
+            <textarea id="description"
+                      name="description"
+                      placeholder="Describe the problem you are experiencing..."
+                      rows="6"
+                      required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+
+            <input type="tel"
+                   id="phone"
+                   name="phone"
+                   placeholder="Enter your phone number">
+        </div>
+
+        <button type="submit">
+            <i class="fa-solid fa-paper-plane"></i>
+            Submit Report
+        </button>
+
+    </form>
+
+</div>
+
+
+</section>
+
+{% endblock %}

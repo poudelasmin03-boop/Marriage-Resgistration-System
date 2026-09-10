@@ -1,208 +1,326 @@
 {% load static %}
 
 <!doctype html>
+
 <html lang="en">
-  <head>
+
+<head>
+
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="description"content="Official Nepal Marriage registration system, certificate Generation"/>
+    <meta name="description" content="Official Nepal Marriage registration system, certificate Generation" />
 
-    <meta name="auhthor" content="Asmin Poudel" />
+    <meta name="author" content="Asmin Poudel" />
 
-    <meta
-      name="keywords"
-      content="Nepal Marriage Registration system,Bihe datra,E-governance Nepal"
-    />
+    <meta name="keywords" content="Nepal Marriage Registration system,Bihe datra,E-governance Nepal" />
 
     <title>{% block title %}Marriage Registration System{% endblock %}</title>
 
+
+<link rel="icon" type="image/png" href="{% static 'images/fav/favicon-96x96.png' %}" sizes="96x96" />
+
+<link rel="icon" type="image/svg+xml" href="{% static 'images/fav/favicon.svg' %}" />
+
+<link rel="shortcut icon" href="{% static 'images/fav/favicon.ico' %}" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/fav/apple-touch-icon.png' %}" />
+
+<link rel="manifest" href="{% static 'images/fav/site.webmanifest' %}" />
+
+
+
     <link rel="stylesheet" href="{% static 'CSS/main.css' %}" />
 
-    {% block css %} {% endblock %}
-  </head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-  <body>
-    {% if messages %} {% for message in messages %}
-    <script>
-      alert("{{message}}");
-    </script>
-    {% endfor %} 
+    {% block css %} {% endblock %}
+
+</head>
+
+<body>
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+        <script>
+            alert("{{message}}");
+        </script>
+
+        {% endfor %}
+
     {% endif %}
 
     <header class="site-header">
-      <nav class="navbar">
-        <div class="logo">
-          <span class="logo-icon">💍</span>
-          <span>Marriage Registry</span>
-        </div>
 
-        <ul class="nav-links">
-            {% if request.user.is_superuser or request.user.is_staff %}
+        <nav class="navbar">
+
+            <div class="logo">
+
+                <span class="logo-icon">
+                    <i class="fa-solid fa-ring"></i>
+                </span>
+
+                <span>Marriage Registry</span>
+
+            </div>
+
+            <ul class="nav-links">
+
+                {% if request.user.is_superuser or request.user.is_staff %}
+
+                    <li>
+                        <a href="/dashboardviews" class="{% if request.resolver_match.url_name == 'dashboard'%}active{% endif %}">
+                            <i class="fa-solid fa-chart-line"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/marriageverification" lass="{% if request.resolver_match.url_name == 'marriageverification'%}active{% endif %}"> 
+                            <i class="fa-solid fa-file-circle-check"></i>
+                            Track & Status
+                        </a>
+                    </li>
+
+                {% endif %}
+
                 <li>
-                 <a href="/dashboardviews">
-             
-              Dashboard
-            </a>
-            </li>
+                    <a href="/" class="{% if request.resolver_match.url_name == 'home'%}active{% endif %}">
+                        <i class="fa-solid fa-house"></i>
+                        Home
+                    </a>
+                </li>
 
-            <li>
-                 <a href="/marriageverification">
-             
-              Marriage Verification
-            </a>
-            </li>
+                <li>
+                    <a href="{% url 'marriageregister' %}" class="{% if request.resolver_match.url_name == 'marriageregister'%}active{% endif %}">
+                        <i class="fa-solid fa-file-signature"></i>
+                        Marraige Register
+                    </a>
+                </li>
 
-            {% endif %}
-          <li>
-            <a href="/">
-             
-              Home
-            </a>
-          </li>
+                <li>
+                    <a href="{% url 'help' %}" class="{% if request.resolver_match.url_name == 'help'%}active{% endif %}">
+                        <i class="fa-solid fa-circle-info"></i>
+                        Help & Info
+                    </a>
+                </li>
 
-          <li>
-            <a href="{% url 'marriageregister' %}">
-             
-              Marraige Register
-            </a>
-          </li>
+                {% if request.user.is_superuser %}
 
-          <li>
-            <a href="{% url 'help' %}">
-             
-              Help & Info
-            </a>
-          </li>
+                <li>
+                    <a href="{% url 'request' %}" class="{% if request.resolver_match.url_name == 'request'%}active{% endif %}">
+                        <i class="fa-solid fa-envelope-open-text"></i>
+                        Marriage Request
+                    </a>
+                </li>
 
-          {% if request.user.is_superuser %}
+                {% endif %}
 
-          <li>
-            <a href="{% url 'request' %}">
-              
-              Marriage Request
-            </a>
-          </li>
+                {% if request.user.is_authenticated %}
 
-          {% endif %} 
-          
-          
-          {% if request.user.is_authenticated %}
+                <li>
+                    <a href="{% url 'logout' %}" class="logout-link">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </a>
+                </li>
 
-          <li>
-            <a href="{% url 'logout' %}" class="logout-link">
-              
-              Logout
-            </a>
-          </li>
+                {% else %}
 
-          {% else %}
+                <li>
+                    <a href="{% url 'register' %}" class="register-link">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Register
+                    </a>
+                </li>
 
-          <li>
-            <a href="{% url 'register' %}" class="register-link"> Register </a>
-          </li>
+                <li>
+                    <a href="{% url 'login' %}" class="login-link">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        Login
+                    </a>
+                </li>
 
-          <li>
-            <a href="{% url 'login' %}" class="login-link"> Login </a>
-          </li>
+                {% endif %}
 
-          {% endif %}
-        </ul>
-      </nav>
+            </ul>
+
+        </nav>
+
     </header>
 
-    <main class="main-content">{% block content %} {% endblock %}</main>
+    <main class="main-content">
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
 
     <footer class="site-footer">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <div class="footer-logo">
-            <span>💍</span>
-            Marriage Registry
-          </div>
 
-          <p>
-            A secure and simple digital platform for marriage registration and
-            certificate services.
-          </p>
+        <div class="footer-content">
 
-          <div class="footer-badge">🇳🇵 Government Service Portal</div>
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+
+                    <span>
+                        <i class="fa-solid fa-ring"></i>
+                    </span>
+
+                    Marriage Registry
+
+                </div>
+
+                <p>
+                    A secure and simple digital platform for marriage registration and
+                    certificate services.
+                </p>
+
+                <div class="footer-badge">
+                    <i class="fa-solid fa-landmark"></i>
+                    Government Service Portal
+                </div>
+
+            </div>
+
+            <div class="footer-section">
+
+                <h4>Quick Links</h4>
+
+                <ul>
+
+                    <li>
+                        <a href="/">
+                            <i class="fa-solid fa-house"></i>
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'register' %}">
+                            <i class="fa-solid fa-user-plus"></i>
+                            Register
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'help' %}">
+                            <i class="fa-solid fa-circle-info"></i>
+                            Help & Info
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="footer-section">
+
+                <h4>Legal</h4>
+
+                <ul>
+
+                    <li>
+                        <a href="{% url 'terms' %}">
+                            <i class="fa-solid fa-file-contract"></i>
+                            Terms & Conditions
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'privacy' %}">
+                            <i class="fa-solid fa-user-shield"></i>
+                            Privacy Policy
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'dataprotection' %}">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            Data Protection
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'disclaimer' %}">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            Disclaimer
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="footer-section">
+
+                <h4>Support</h4>
+
+                <ul>
+
+                    <li>
+                        <a href="{% url 'contactus'%}">
+                            <i class="fa-solid fa-envelope"></i>
+                            Contact Us
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa-solid fa-circle-question"></i>
+                            FAQ
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'report_issuse_views' %}">
+                            <i class="fa-solid fa-bug"></i>
+                            Report Issue
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa-solid fa-comment-dots"></i>
+                            Feedback
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
         </div>
 
-        <div class="footer-section">
-          <h4>Quick Links</h4>
+        <div class="footer-bottom">
 
-          <ul>
-            <li>
-              <a href="/">Home</a>
-            </li>
+            <div class="footer-line"></div>
 
-            <li>
-              <a href="{% url 'register' %}"> Register </a>
-            </li>
+            <div class="footer-bottom-content">
 
-            <li>
-              <a href="{% url 'help' %}"> Help & Info </a>
-            </li>
-          </ul>
+                <p>
+                    &copy; 2026 Marriage Registration System. All Rights Reserved.
+                </p>
+
+                <p>
+                   AsMin
+                  Poudel
+                </p>
+
+            </div>
+
         </div>
 
-        <div class="footer-section">
-          <h4>Legal</h4>
-
-          <ul>
-            <li>
-              <a href="{% url 'terms' %}"> Terms & Conditions </a>
-            </li>
-
-            <li>
-              <a href="{% url 'privacy' %}"> Privacy Policy </a>
-            </li>
-
-            <li>
-              <a href="{% url 'dataprotection' %}"> Data Protection </a>
-            </li>
-
-            <li>
-              <a href="{% url 'disclaimer' %}"> Disclaimer </a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="footer-section">
-          <h4>Support</h4>
-
-          <ul>
-            <li>
-              <a href="{% url 'contactus'%}"> Contact Us </a>
-            </li>
-
-            <li>
-              <a href="#"> FAQ </a>
-            </li>
-
-            <li>
-              <a href="#"> Report Issue </a>
-            </li>
-
-            <li>
-              <a href="#"> Feedback </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div class="footer-line"></div>
-
-        <div class="footer-bottom-content">
-          <p>&copy; 2026 Marriage Registration System. All Rights Reserved.</p>
-
-          <p>Made with ❤️ in Nepal</p>
-        </div>
-      </div>
     </footer>
 
     <script src="{% static 'JS/base.js' %}"></script>
-  </body>
+
+</body>
+
 </html>
